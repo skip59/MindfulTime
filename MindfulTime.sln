@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindfulTime.Auth", "MindfulTime.Auth\MindfulTime.Auth.csproj", "{FA4ECC3C-B5E1-415C-98FB-587AB227E7B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindfulTime.Calendar", "MindfulTime.Calendar\MindfulTime.Calendar.csproj", "{265731DC-118F-42A5-9926-99CF5D02B841}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindfulTime.Weather", "MindfulTime.Weather\MindfulTime.Weather.csproj", "{5EBEF905-9BAB-417D-8603-825CD49DE778}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindfulTime.AI", "MindfulTime.AI\MindfulTime.AI.csproj", "{1D5DAF10-4FB0-4AD2-A33D-7C77DFC7F461}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindfulTime.Notification", "MindfulTime.Notification\MindfulTime.Notification.csproj", "{DC0A1E8D-8B3E-4364-A1F6-C14C0CB72E06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA4ECC3C-B5E1-415C-98FB-587AB227E7B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA4ECC3C-B5E1-415C-98FB-587AB227E7B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA4ECC3C-B5E1-415C-98FB-587AB227E7B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA4ECC3C-B5E1-415C-98FB-587AB227E7B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{265731DC-118F-42A5-9926-99CF5D02B841}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{265731DC-118F-42A5-9926-99CF5D02B841}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{265731DC-118F-42A5-9926-99CF5D02B841}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{265731DC-118F-42A5-9926-99CF5D02B841}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EBEF905-9BAB-417D-8603-825CD49DE778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EBEF905-9BAB-417D-8603-825CD49DE778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EBEF905-9BAB-417D-8603-825CD49DE778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EBEF905-9BAB-417D-8603-825CD49DE778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D5DAF10-4FB0-4AD2-A33D-7C77DFC7F461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D5DAF10-4FB0-4AD2-A33D-7C77DFC7F461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D5DAF10-4FB0-4AD2-A33D-7C77DFC7F461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D5DAF10-4FB0-4AD2-A33D-7C77DFC7F461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC0A1E8D-8B3E-4364-A1F6-C14C0CB72E06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC0A1E8D-8B3E-4364-A1F6-C14C0CB72E06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC0A1E8D-8B3E-4364-A1F6-C14C0CB72E06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC0A1E8D-8B3E-4364-A1F6-C14C0CB72E06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB171116-F68E-41F1-8688-52C58E94296D}
+	EndGlobalSection
+EndGlobal

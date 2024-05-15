@@ -1,0 +1,6 @@
+@MindfulTime.AI_HostAddress = http://localhost:5250
+
+GET {{MindfulTime.AI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
