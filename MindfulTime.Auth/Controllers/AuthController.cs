@@ -21,5 +21,17 @@ namespace MindfulTime.Auth.Controllers
             }
             return BadRequest("Входные данные не валидны.");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser(UserDto userDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userService.CreateUser(userDto);
+                if (user.isError) return BadRequest(user.ErrorMessage);
+                return Ok(user.Data);
+            }
+            return BadRequest("Входные данные не валидны.");
+        }
     }
 }
