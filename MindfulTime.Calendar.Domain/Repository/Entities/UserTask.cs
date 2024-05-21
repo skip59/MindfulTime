@@ -1,14 +1,17 @@
-﻿namespace MindfulTime.Calendar.Domain.Repository.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MindfulTime.Calendar.Domain.Repository.Entities
 {
     public class UserTask
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        [Key]
+        public Guid EventId { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime LastModifiedDate { get; set;}
-        public DateTime LastModifiedBy { get; set;}
-        public float StorePoint { get; set; }
-        public User UserId { get; set; }
+        public string Start { get; set; }
+        public string End { get; set; }
+        public bool AllDay { get; set; }
+        public double StorePoint { get; set; }
+        public Guid UserId { get; set; }
     }
 }

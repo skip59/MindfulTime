@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using MindfulTime.Auth.Domain.Repository.Entities;
 using MindfulTime.Auth.Domain.Repository.Interfaces;
 using MindfulTime.Auth.DTO;
@@ -40,10 +41,10 @@ namespace MindfulTime.Auth.Services
             return new BaseResponse<UserDto>
             {
                 Data = new UserDto
-                { 
-                    Role = result.Data.Role, 
-                    Email = result.Data.Email, 
-                    Id = result.Data.Id 
+                {
+                    Role = result.Data.Role,
+                    Email = result.Data.Email,
+                    Id = result.Data.Id
                 }
             };
 
@@ -56,19 +57,16 @@ namespace MindfulTime.Auth.Services
 
         public async Task<BaseResponse<UserDto>> ReadUser(UserDto user)
         {
-            var userFromDb = _repository.ReadAsync();
-            if (userFromDb.Any(userEmail => userEmail.Email == user.Email))
+            var userFromDb = await _repository.ReadAsync().SingleOrDefaultAsync(x => x.Email == user.Email && x.Password == user.Password);
+            if (userFromDb!= null)
             {
-                var _user = await Task.Run(() => userFromDb.Select(x => x).Where(x => x.Email == user.Email && x.Password == user.Password).SingleOrDefault());
-                if (_user != null)
+                UserDto userDto = new()
                 {
-                    UserDto userDto = new()
-                    {
-                        Id = _user.Id,
-                        Role = _user.Role,
-                    };
-                    return new BaseResponse<UserDto>() { Data = userDto };
-                }
+                    Id = userFromDb.Id,
+                    Role = userFromDb.Role,
+                };
+                return new BaseResponse<UserDto>() { Data = userDto };
+
             }
             return new BaseResponse<UserDto>() { ErrorMessage = "Пользователь не найден." };
         }

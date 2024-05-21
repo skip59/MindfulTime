@@ -3,26 +3,54 @@ using MindfulTime.Calendar.Domain.Repository.Interfaces;
 
 namespace MindfulTime.Calendar.Domain.Repository.Services
 {
-    public class TaskRepositoryService : IBaseRepository<UserTask>
+    public class TaskRepositoryService(ApplicationDbContext context) : IBaseRepository<UserTask>
     {
-        public Task<BaseResponse<UserTask>> CreateAsync(UserTask entity)
+        private readonly ApplicationDbContext _context = context;
+        public async Task<BaseResponse<UserTask>> CreateAsync(UserTask entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _context.Tasks.AddAsync(entity);
+                await _context.SaveChangesAsync();
+                return new BaseResponse<UserTask> { Data = entity };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<UserTask>() { ErrorMessage = ex.Message };
+            }
         }
 
-        public Task<BaseResponse<UserTask>> DeleteAsync(UserTask entity)
+        public async Task<BaseResponse<UserTask>> DeleteAsync(UserTask entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Tasks.Remove(entity);
+                await _context.SaveChangesAsync();
+                return new BaseResponse<UserTask> { Data = entity };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<UserTask>() { ErrorMessage = ex.Message };
+            }
         }
 
         public IQueryable<UserTask> ReadAsync()
         {
-            throw new NotImplementedException();
+            return _context.Tasks;
         }
 
-        public Task<BaseResponse<UserTask>> UpdateAsync(UserTask entity)
+        public async Task<BaseResponse<UserTask>> UpdateAsync(UserTask entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Tasks.Update(entity);
+                await _context.SaveChangesAsync();
+                return new BaseResponse<UserTask> { Data = entity };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<UserTask>() { ErrorMessage = ex.Message };
+            }
         }
     }
 }

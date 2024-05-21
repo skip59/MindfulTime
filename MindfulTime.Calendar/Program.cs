@@ -1,6 +1,7 @@
-
 using MassTransit;
 using MindfulTime.Calendar.Domain.DI;
+using MindfulTime.Calendar.Interfaces;
+using MindfulTime.Calendar.Services;
 using System.Reflection;
 
 namespace MindfulTime.Calendar
@@ -18,7 +19,7 @@ namespace MindfulTime.Calendar
                 o.UsingRabbitMq((context, cfg) => cfg.ConfigureEndpoints(context));
             });
             // Add services to the container.
-            
+            builder.Services.AddTransient<IUserTaskService, UserTaskService>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

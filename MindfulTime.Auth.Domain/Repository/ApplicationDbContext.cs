@@ -20,7 +20,7 @@ namespace MindfulTime.Auth.Domain.Repository
             {
                 var user = new User
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("242d4794-a0c5-4b23-af6b-dff338ca9b80"),
                     Email = "admin@gmail.ru",
                     Name = "Admin",
                     Password = "Admin",
