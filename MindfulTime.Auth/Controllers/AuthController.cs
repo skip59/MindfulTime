@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MindfulTime.Auth.DTO;
 using MindfulTime.Auth.Interfaces;
+using OpenClasses;
 
 namespace MindfulTime.Auth.Controllers
 {
@@ -30,6 +30,18 @@ namespace MindfulTime.Auth.Controllers
                 var user = await _userService.CreateUser(userDto);
                 if (user.isError) return BadRequest(user.ErrorMessage);
                 return Ok(user.Data);
+            }
+            return BadRequest("Входные данные не валидны.");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetUsers(UserDto userDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var users = await _userService.ReadAllUsers(userDto);
+                if (users.isError) return BadRequest(users.ErrorMessage);
+                return Ok(users.Data);
             }
             return BadRequest("Входные данные не валидны.");
         }

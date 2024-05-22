@@ -1,4 +1,5 @@
-﻿using MindfulTime.Calendar.Domain.Repository.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MindfulTime.Calendar.Domain.Repository.Entities;
 using MindfulTime.Calendar.Domain.Repository.Interfaces;
 using MindfulTime.Calendar.DTO;
 using MindfulTime.Calendar.Interfaces;
@@ -13,7 +14,7 @@ namespace MindfulTime.Calendar.Services
         {
             var modelTask = Mapper(_event);
             var result = await _repository.CreateAsync(modelTask);
-            if(result.IsError) return new BaseResponse<EventDTO>() { ErrorMessage = result.ErrorMessage};
+            if (result.IsError) return new BaseResponse<EventDTO>() { ErrorMessage = result.ErrorMessage };
             return new BaseResponse<EventDTO>() { Data = _event };
         }
 
@@ -22,10 +23,16 @@ namespace MindfulTime.Calendar.Services
             throw new NotImplementedException();
         }
 
-        public Task<BaseResponse<EventDTO>> ReadTask(EventDTO _event)
+        public async Task<BaseResponse<List<EventDTO>>> ReadTasks(UserMT user)
         {
-            throw new NotImplementedException();
+            var tasks = await _repository.ReadAsync().Where(x => x.UserId == user.Id).ToListAsync();
+            if (tasks.Count == 0) return new BaseResponse<List<EventDTO>>() { ErrorMessage = "Нет данных" };
+            return new BaseResponse<List<EventDTO>>()
+            {
+                Data = ReverseMapper(tasks)
+            };
         }
+
 
         public Task<BaseResponse<EventDTO>> UpdateTask(EventDTO _event)
         {
@@ -45,6 +52,26 @@ namespace MindfulTime.Calendar.Services
                 UserId = eventDTO.UserId,
                 StorePoint = eventDTO.StorePoint,
             };
+        }
+
+        private static List<EventDTO> ReverseMapper(List<UserTask> userTasks)
+        {
+            var result = new List<EventDTO>();
+            foreach (var userTask in userTasks)
+            {
+                var eventTask = new EventDTO
+                {
+                    AllDay = userTask.AllDay,
+                    Description = userTask.Description,
+                    End = userTask.End,
+                    Start = userTask.Start,
+                    EventId = userTask.EventId,
+                    Title = userTask.Title,
+                    UserId = userTask.UserId,
+                };
+                result.Add(eventTask);
+            }
+            return result;
         }
     }
 }

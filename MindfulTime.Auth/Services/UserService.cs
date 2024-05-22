@@ -44,7 +44,8 @@ namespace MindfulTime.Auth.Services
                 {
                     Role = result.Data.Role,
                     Email = result.Data.Email,
-                    Id = result.Data.Id
+                    Id = result.Data.Id,
+                    Name = result.Data.Name,
                 }
             };
 
@@ -64,11 +65,38 @@ namespace MindfulTime.Auth.Services
                 {
                     Id = userFromDb.Id,
                     Role = userFromDb.Role,
+                    Name = userFromDb.Name,
+                    Email = userFromDb.Email
                 };
                 return new BaseResponse<UserDto>() { Data = userDto };
 
             }
             return new BaseResponse<UserDto>() { ErrorMessage = "Пользователь не найден." };
+        }
+
+        public async Task<BaseResponse<List<UserDto>>> ReadAllUsers(UserDto user)
+        {
+            var usersFromDb = await _repository.ReadAsync().ToListAsync();
+            var mainUser = usersFromDb.SingleOrDefault(x => x.Id == user.Id && x.Role == user.Role && x.Password == user.Password);
+            if (mainUser!= null)
+            {
+                List<UserDto> users = [];
+                foreach (var _user in usersFromDb)
+                {
+                    UserDto userDto = new()
+                    {
+                        Id = _user.Id,
+                        Role = _user.Role,
+                        Name = _user.Name,
+                        Email = _user.Email,
+                    };
+                    users.Add(userDto);
+                }
+                
+                return new BaseResponse<List<UserDto>>() { Data = users };
+
+            }
+            return new BaseResponse<List<UserDto>>() { ErrorMessage = "Не авторизованный запрос." };
         }
 
         public Task<BaseResponse<UserDto>> UpdateUser(UserDto user)

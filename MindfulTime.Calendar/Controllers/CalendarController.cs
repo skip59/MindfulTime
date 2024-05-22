@@ -21,5 +21,17 @@ namespace MindfulTime.Calendar.Controllers
             }
             return BadRequest("Входные данные не валидны.");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GetTasks(UserMT user)
+        {
+            if (ModelState.IsValid)
+            {
+                var tasks = await _userTask.ReadTasks(user);
+                if (tasks.isError) return BadRequest(tasks.ErrorMessage);
+                return Ok(tasks.Data);
+            }
+            return BadRequest("Входные данные не валидны.");
+        }
     }
 }

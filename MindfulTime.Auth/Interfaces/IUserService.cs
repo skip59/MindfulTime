@@ -1,4 +1,5 @@
 ﻿using MindfulTime.Auth.DTO;
+using OpenClasses;
 
 namespace MindfulTime.Auth.Interfaces
 {
@@ -7,6 +8,7 @@ namespace MindfulTime.Auth.Interfaces
         public Task<BaseResponse<UserDto>> CreateUser(UserDto user);
         public Task<BaseResponse<UserDto>> DeleteUser(UserDto user);
         public Task<BaseResponse<UserDto>> UpdateUser(UserDto user);
+        public Task<BaseResponse<List<UserDto>>> ReadAllUsers(UserDto user);
         public Task<BaseResponse<UserDto>> ReadUser(UserDto user);
     }
 }

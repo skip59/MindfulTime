@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MindfulTime.Auth.DTO
+namespace OpenClasses
 {
     public class UserDto
     {
