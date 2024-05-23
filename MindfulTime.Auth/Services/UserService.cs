@@ -14,8 +14,8 @@ namespace MindfulTime.Auth.Services
         private readonly IPublishEndpoint _publishEndpoint = publishEndpoint;
         public async Task<BaseResponse<UserDto>> CreateUser(UserDto user)
         {
-            var userFromDb = _repository.ReadAsync();
-            if (userFromDb.Any(userEmail => userEmail.Email == user.Email)) return new BaseResponse<UserDto> { ErrorMessage = $"Пользователь с {user.Email} уже есть в базе данных. Создание пользователя не возможно." };
+            var userFromDb = await _repository.ReadAsync().SingleOrDefaultAsync(x=> x.Email == user.Email);
+            if (userFromDb != null) return new BaseResponse<UserDto> { ErrorMessage = $"Пользователь с {user.Email} уже есть в базе данных. Создание пользователя не возможно." };
             var userToDb = new User()
             {
                 Email = user.Email,
@@ -51,9 +51,32 @@ namespace MindfulTime.Auth.Services
 
         }
 
-        public Task<BaseResponse<UserDto>> DeleteUser(UserDto user)
+        public async Task<BaseResponse<UserDto>> DeleteUser(UserDto user)
         {
-            throw new NotImplementedException();
+            var userFromDb = await _repository.ReadAsync().SingleOrDefaultAsync(x => x.Email == user.Email);
+            if (userFromDb == null || userFromDb.Email =="admin@gmail.ru") return new BaseResponse<UserDto> { ErrorMessage = $"Пользователь с {user.Email} не найден в базе данных." };
+            
+            var result = await _repository.DeleteAsync(userFromDb);
+            if (result.IsError) return new BaseResponse<UserDto> { ErrorMessage = result.ErrorMessage };
+            User_del_MT publishUser = new()
+            {
+                Email = userFromDb.Email,
+                Id = userFromDb.Id,
+                Name = userFromDb.Name,
+                Password = userFromDb.Password,
+                Role = userFromDb.Role
+            };
+            await _publishEndpoint.Publish(publishUser);
+            return new BaseResponse<UserDto>
+            {
+                Data = new UserDto
+                {
+                    Role = result.Data.Role,
+                    Email = result.Data.Email,
+                    Id = result.Data.Id,
+                    Name = result.Data.Name,
+                }
+            };
         }
 
         public async Task<BaseResponse<UserDto>> ReadUser(UserDto user)
@@ -99,9 +122,39 @@ namespace MindfulTime.Auth.Services
             return new BaseResponse<List<UserDto>>() { ErrorMessage = "Не авторизованный запрос." };
         }
 
-        public Task<BaseResponse<UserDto>> UpdateUser(UserDto user)
+        public async Task<BaseResponse<UserDto>> UpdateUser(UserDto user)
         {
-            throw new NotImplementedException();
+            var userFromDb = await _repository.ReadAsync().SingleOrDefaultAsync(x => x.Email == user.Email);
+            if (userFromDb == null) return new BaseResponse<UserDto> { ErrorMessage = $"Пользователь с {user.Email} не найден в базе данных." };
+            var userToDb = new User()
+            {
+                Email = user.Email,
+                Id = user.Id,
+                Name = user.Name,
+                Password = user.Password,
+                Role = user.Role
+            };
+            var result = await _repository.UpdateAsync(userToDb);
+            if (result.IsError) return new BaseResponse<UserDto> { ErrorMessage = result.ErrorMessage };
+            User_upd_MT publishUser = new()
+            {
+                Email = userToDb.Email,
+                Id = userToDb.Id,
+                Name = userToDb.Name,
+                Password = userToDb.Password,
+                Role = userToDb.Role
+            };
+            await _publishEndpoint.Publish(publishUser);
+            return new BaseResponse<UserDto>
+            {
+                Data = new UserDto
+                {
+                    Role = result.Data.Role,
+                    Email = result.Data.Email,
+                    Id = result.Data.Id,
+                    Name = result.Data.Name,
+                }
+            };
         }
     }
 }

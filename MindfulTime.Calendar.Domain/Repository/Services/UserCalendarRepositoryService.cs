@@ -10,19 +10,26 @@ namespace MindfulTime.Calendar.Domain.Repository.Services
         {
             var mapResult = Mapper(entity);
             if (mapResult == null) return new BaseResponse<User> { ErrorMessage = "Неверные входные днные при конвертации объекта" };
-            var users = await Task.Run(ReadAsync);
-            if (users.Any(x => x.Email == mapResult.Email))
+            if (!_context.Users.Any(x => x.Email == mapResult.Email))
             {
-                if(await UpdateAsync(entity)) return new BaseResponse<User> { Data =  mapResult };
+                await _context.Users.AddAsync(mapResult);
+                await _context.SaveChangesAsync();
+                return new BaseResponse<User> { Data =  mapResult };
             }
-            await _context.Users.AddAsync(mapResult);
-            await _context.SaveChangesAsync();
-            return new BaseResponse<User> { Data =  mapResult };
+            return new BaseResponse<User> { ErrorMessage = $"Пользователь {entity.Email} уже существует в базе данных" };
         }
 
-        public Task<BaseResponse<User>> DeleteAsync(UserMT entity)
+        public async Task<BaseResponse<User>> DeleteAsync(User_del_MT entity)
         {
-            throw new NotImplementedException();
+            var mapResult = Mapper(entity);
+            if (mapResult == null) return new BaseResponse<User> { ErrorMessage = "Неверные входные днные при конвертации объекта" };
+            if (_context.Users.Any(x => x.Email == mapResult.Email))
+            {
+                _context.Users.Remove(mapResult);
+                await _context.SaveChangesAsync();
+                return new BaseResponse<User> { Data =  mapResult };
+            }
+            return new BaseResponse<User> { ErrorMessage = $"Пользователь {entity.Email} не найден" };
         }
 
         public IQueryable<User> ReadAsync()
@@ -30,9 +37,8 @@ namespace MindfulTime.Calendar.Domain.Repository.Services
             return _context.Users;
         }
 
-        public async Task<bool> UpdateAsync(UserMT entity)
+        public async Task<bool> UpdateAsync(User_upd_MT entity)
         {
-            if (entity == null) return false;
             var mapResult = Mapper(entity);
             if (mapResult == null) return false;
             if (_context.Users.Any(x => x.Email == mapResult.Email))
@@ -44,20 +50,33 @@ namespace MindfulTime.Calendar.Domain.Repository.Services
             return false;
         }
 
-        private static User Mapper(UserMT user)
+        private static User Mapper<T>(T user) => user switch
         {
-            if (user == null)
+            UserMT userMt => new User
             {
-                return null;
-            }
-            return new User
+                Email = userMt.Email,
+                Id = userMt.Id,
+                Name = userMt.Name,
+                Password = userMt.Password,
+                Role = userMt.Role
+            },
+            User_del_MT userDelMt => new User
             {
-                Email = user.Email,
-                Id = user.Id,
-                Name = user.Name,
-                Password = user.Password,
-                Role = user.Role
-            };
-        }
+                Email = userDelMt.Email,
+                Id = userDelMt.Id,
+                Name = userDelMt.Name,
+                Password = userDelMt.Password,
+                Role = userDelMt.Role
+            },
+            User_upd_MT userUpdMt => new User
+            {
+                Email = userUpdMt.Email,
+                Id = userUpdMt.Id,
+                Name = userUpdMt.Name,
+                Password = userUpdMt.Password,
+                Role = userUpdMt.Role
+            },
+            _ => null,
+        };
     }
 }

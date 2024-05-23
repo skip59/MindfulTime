@@ -42,7 +42,7 @@ namespace MindfulTime.Auth.Domain.Repository.Services
             {
                 return _context.Users.Select(x => x);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null!;
             }
@@ -53,9 +53,11 @@ namespace MindfulTime.Auth.Domain.Repository.Services
         {
             try
             {
-                _context.Users.Update(entity);
+                var existingUser = await _context.Users.FindAsync(entity.Id);
+                entity.Password = existingUser!.Password;
+                _context.Users.Entry(existingUser!).CurrentValues.SetValues(entity);
                 await _context.SaveChangesAsync();
-                return new BaseResponse<User> { Data = _context.Users.Single(x => x.Id == entity.Id) };
+                return new BaseResponse<User> { Data = entity };
             }
             catch (Exception ex)
             {

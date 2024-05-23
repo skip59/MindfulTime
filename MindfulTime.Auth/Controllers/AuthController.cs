@@ -45,5 +45,29 @@ namespace MindfulTime.Auth.Controllers
             }
             return BadRequest("Входные данные не валидны.");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(UserDto userDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var users = await _userService.UpdateUser(userDto);
+                if (users.isError) return BadRequest(users.ErrorMessage);
+                return Ok(users.Data);
+            }
+            return BadRequest("Входные данные не валидны.");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(UserDto userDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var users = await _userService.DeleteUser(userDto);
+                if (users.isError) return BadRequest(users.ErrorMessage);
+                return Ok(users.Data);
+            }
+            return BadRequest("Входные данные не валидны.");
+        }
     }
 }

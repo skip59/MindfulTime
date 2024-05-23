@@ -1,11 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace OpenClasses
+﻿namespace OpenClasses
 {
-    public class UserDto
+    public class User_del_MT
     {
         public Guid Id { get; set; }
-        [Required]
         public string Email { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
