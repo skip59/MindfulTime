@@ -3,7 +3,8 @@ using MindfulTime.Calendar.Domain.Repository.Entities;
 using MindfulTime.Calendar.Domain.Repository.Interfaces;
 using MindfulTime.Calendar.DTO;
 using MindfulTime.Calendar.Interfaces;
-using OpenClasses;
+using OpenClasses.Calendar;
+using OpenClasses.Notification;
 
 namespace MindfulTime.Calendar.Services
 {
@@ -23,7 +24,7 @@ namespace MindfulTime.Calendar.Services
             throw new NotImplementedException();
         }
 
-        public async Task<BaseResponse<List<EventDTO>>> ReadTasks(UserMT user)
+        public async Task<BaseResponse<List<EventDTO>>> ReadTasks(NUserMT user)
         {
             var tasks = await _repository.ReadAsync().Where(x => x.UserId == user.Id).ToListAsync();
             if (tasks.Count == 0) return new BaseResponse<List<EventDTO>>() { ErrorMessage = "Нет данных" };

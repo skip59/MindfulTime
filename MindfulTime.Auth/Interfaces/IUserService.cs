@@ -1,5 +1,5 @@
 ﻿using MindfulTime.Auth.DTO;
-using OpenClasses;
+using OpenClasses.Auth;
 
 namespace MindfulTime.Auth.Interfaces
 {

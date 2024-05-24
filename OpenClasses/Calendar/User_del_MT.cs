@@ -1,6 +1,6 @@
-﻿namespace OpenClasses
+﻿namespace OpenClasses.Calendar
 {
-    public class UserMT
+    public class User_del_MT
     {
         public Guid Id { get; set; }
         public string Email { get; set; }

@@ -1,12 +1,12 @@
-﻿using MindfulTime.Calendar.Domain.Repository.Entities;
-using OpenClasses.Calendar;
+﻿using MindfulTime.Notification.Domain.Repository.Entities;
+using OpenClasses.Notification;
 
-namespace MindfulTime.Calendar.Domain.Repository.Services
+namespace MindfulTime.Notification.Domain.Repository.Services
 {
-    public class UserCalendarRepositoryService(ApplicationDbContext context)
+    public class UserNotificationRepositoryService(ApplicationDbContext context)
     {
         private readonly ApplicationDbContext _context = context;
-        public async Task<BaseResponse<User>> CreateAsync(UserMT entity)
+        public async Task<BaseResponse<User>> CreateAsync(NUserMT entity)
         {
             var mapResult = Mapper(entity);
             if (mapResult == null) return new BaseResponse<User> { ErrorMessage = "Неверные входные днные при конвертации объекта" };
@@ -19,7 +19,7 @@ namespace MindfulTime.Calendar.Domain.Repository.Services
             return new BaseResponse<User> { ErrorMessage = $"Пользователь {entity.Email} уже существует в базе данных" };
         }
 
-        public async Task<BaseResponse<User>> DeleteAsync(User_del_MT entity)
+        public async Task<BaseResponse<User>> DeleteAsync(NUser_del_MT entity)
         {
             var mapResult = Mapper(entity);
             if (mapResult == null) return new BaseResponse<User> { ErrorMessage = "Неверные входные днные при конвертации объекта" };
@@ -37,7 +37,7 @@ namespace MindfulTime.Calendar.Domain.Repository.Services
             return _context.Users;
         }
 
-        public async Task<bool> UpdateAsync(User_upd_MT entity)
+        public async Task<bool> UpdateAsync(NUser_upd_MT entity)
         {
             var mapResult = Mapper(entity);
             if (mapResult == null) return false;
@@ -52,7 +52,7 @@ namespace MindfulTime.Calendar.Domain.Repository.Services
 
         private static User Mapper<T>(T user) => user switch
         {
-            UserMT userMt => new User
+            NUserMT userMt => new User
             {
                 Email = userMt.Email,
                 Id = userMt.Id,
@@ -60,7 +60,7 @@ namespace MindfulTime.Calendar.Domain.Repository.Services
                 Password = userMt.Password,
                 Role = userMt.Role
             },
-            User_del_MT userDelMt => new User
+            NUser_del_MT userDelMt => new User
             {
                 Email = userDelMt.Email,
                 Id = userDelMt.Id,
@@ -68,7 +68,7 @@ namespace MindfulTime.Calendar.Domain.Repository.Services
                 Password = userDelMt.Password,
                 Role = userDelMt.Role
             },
-            User_upd_MT userUpdMt => new User
+            NUser_upd_MT userUpdMt => new User
             {
                 Email = userUpdMt.Email,
                 Id = userUpdMt.Id,

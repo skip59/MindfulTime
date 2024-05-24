@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MindfulTime.Calendar.Interfaces;
-using OpenClasses;
+using OpenClasses.Calendar;
+using OpenClasses.Notification;
 
 namespace MindfulTime.Calendar.Controllers
 {
@@ -23,7 +24,7 @@ namespace MindfulTime.Calendar.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetTasks(UserMT user)
+        public async Task<IActionResult> GetTasks(NUserMT user)
         {
             if (ModelState.IsValid)
             {

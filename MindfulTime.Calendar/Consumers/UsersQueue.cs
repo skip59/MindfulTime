@@ -1,6 +1,7 @@
 ﻿using MassTransit;
 using MindfulTime.Calendar.Domain.Repository.Services;
-using OpenClasses;
+using OpenClasses.Calendar;
+using OpenClasses.Notification;
 
 namespace MindfulTime.Calendar.Consumers
 {

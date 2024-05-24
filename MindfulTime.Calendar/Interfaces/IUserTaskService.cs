@@ -1,5 +1,6 @@
 ﻿using MindfulTime.Calendar.DTO;
-using OpenClasses;
+using OpenClasses.Calendar;
+using OpenClasses.Notification;
 
 namespace MindfulTime.Calendar.Interfaces
 {
@@ -8,6 +9,6 @@ namespace MindfulTime.Calendar.Interfaces
         public Task<BaseResponse<EventDTO>> CreateTask(EventDTO _event);
         public Task<BaseResponse<EventDTO>> DeleteTask(EventDTO _event);
         public Task<BaseResponse<EventDTO>> UpdateTask(EventDTO _event);
-        public Task<BaseResponse<List<EventDTO>>> ReadTasks(UserMT user);
+        public Task<BaseResponse<List<EventDTO>>> ReadTasks(NUserMT user);
     }
 }

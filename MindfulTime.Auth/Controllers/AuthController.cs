@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MindfulTime.Auth.Interfaces;
-using OpenClasses;
+using OpenClasses.Auth;
 
 namespace MindfulTime.Auth.Controllers
 {

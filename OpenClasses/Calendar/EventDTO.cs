@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OpenClasses
+namespace OpenClasses.Calendar
 {
     public class EventDTO
     {
@@ -16,7 +16,7 @@ namespace OpenClasses
         public double Priority { get; set; }
         public double Complexity { get; set; }
         public double Importance { get; set; }
-        public bool HasDependencies { get; set; } 
+        public bool HasDependencies { get; set; }
         public bool AllDay { get; set; }
         [Required]
         public Guid UserId { get; set; }
@@ -75,7 +75,7 @@ namespace OpenClasses
         }
 
         private double DependencyFactor => HasDependencies ? 1.0 : 0.7;
-        public double StorePoint => AllDay ? 0.5 * PriorityFactor * ComplexityFactor * ImportanceFactor * DependencyFactor : (DurationInHours * ComplexityFactor * ImportanceFactor * DependencyFactor) > 100 ? 100 : DurationInHours * ComplexityFactor * ImportanceFactor * DependencyFactor;
+        public double StorePoint => AllDay ? 0.5 * PriorityFactor * ComplexityFactor * ImportanceFactor * DependencyFactor : DurationInHours * ComplexityFactor * ImportanceFactor * DependencyFactor > 100 ? 100 : DurationInHours * ComplexityFactor * ImportanceFactor * DependencyFactor;
 
 
     }

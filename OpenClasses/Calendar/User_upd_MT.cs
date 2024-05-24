@@ -1,4 +1,4 @@
-﻿namespace OpenClasses
+﻿namespace OpenClasses.Calendar
 {
     public class User_upd_MT
     {

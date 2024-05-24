@@ -4,7 +4,9 @@ using MindfulTime.Auth.Domain.Repository.Entities;
 using MindfulTime.Auth.Domain.Repository.Interfaces;
 using MindfulTime.Auth.DTO;
 using MindfulTime.Auth.Interfaces;
-using OpenClasses;
+using OpenClasses.Auth;
+using OpenClasses.Calendar;
+using OpenClasses.Notification;
 
 namespace MindfulTime.Auth.Services
 {
@@ -35,8 +37,17 @@ namespace MindfulTime.Auth.Services
                 Password = userToDb.Password,
                 Role = userToDb.Role
             };
+            NUserMT NpublishUser = new()
+            {
+                Email = userToDb.Email,
+                Id = userToDb.Id,
+                Name = userToDb.Name,
+                Password = userToDb.Password,
+                Role = userToDb.Role
+            };
 
             await _publishEndpoint.Publish(publishUser);
+            await _publishEndpoint.Publish(NpublishUser);
 
             return new BaseResponse<UserDto>
             {
@@ -66,7 +77,16 @@ namespace MindfulTime.Auth.Services
                 Password = userFromDb.Password,
                 Role = userFromDb.Role
             };
+            NUser_del_MT NpublishUser = new()
+            {
+                Email = userFromDb.Email,
+                Id = userFromDb.Id,
+                Name = userFromDb.Name,
+                Password = userFromDb.Password,
+                Role = userFromDb.Role
+            };
             await _publishEndpoint.Publish(publishUser);
+            await _publishEndpoint.Publish(NpublishUser);
             return new BaseResponse<UserDto>
             {
                 Data = new UserDto
@@ -144,7 +164,17 @@ namespace MindfulTime.Auth.Services
                 Password = userToDb.Password,
                 Role = userToDb.Role
             };
+            NUser_upd_MT NpublishUser = new()
+            {
+                Email = userToDb.Email,
+                Id = userToDb.Id,
+                Name = userToDb.Name,
+                Password = userToDb.Password,
+                Role = userToDb.Role
+            };
             await _publishEndpoint.Publish(publishUser);
+            await _publishEndpoint.Publish(NpublishUser);
+
             return new BaseResponse<UserDto>
             {
                 Data = new UserDto
