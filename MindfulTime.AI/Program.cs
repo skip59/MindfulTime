@@ -1,4 +1,7 @@
 
+using MindfulTime.AI.Interfaces;
+using MindfulTime.AI.Services;
+
 namespace MindfulTime.AI
 {
     public class Program
@@ -8,7 +11,15 @@ namespace MindfulTime.AI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            var rootFolder = Directory.GetCurrentDirectory();
+            var modelName = "task_recomendation_model.zip";
+            if(!File.Exists(Path.Combine(rootFolder, modelName)))
+            {
+                var isCreated = MLBuilderService.CreateNewMLModel();
+                if (!isCreated) throw new Exception("Ошибка создания модели");
+            }
 
+            builder.Services.AddSingleton<IRecomendationService, RecomendationService>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
