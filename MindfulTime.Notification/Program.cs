@@ -1,12 +1,15 @@
 using MassTransit;
 using MindfulTime.Notification.Domain.DI;
+using PRTelegramBot.Configs;
+using PRTelegramBot.Core;
+using PRTelegramBot.Extensions;
 using System.Reflection;
 
 namespace MindfulTime.Notification
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             string connection = builder.Configuration.GetConnectionString("UserDatabase");
@@ -21,7 +24,16 @@ namespace MindfulTime.Notification
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddTransientBotHandlers();
+            void PrBotInstance_OnLogError(Exception ex, long? id)
+            {
+                Console.WriteLine(ex.Message, id);
+            }
 
+            void PrBotInstance_OnLogCommon(string msg, Enum typeEvent, ConsoleColor color)
+            {
+                Console.WriteLine(msg, typeEvent);
+            }
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -37,6 +49,17 @@ namespace MindfulTime.Notification
 
 
             app.MapControllers();
+
+            var prBotInstance = new PRBot(new TelegramConfig
+            {
+                Token = "6836849143:AAHFUyavwOBbnlfcHDOGe5xDbRyISE_K7bo",
+                ClearUpdatesOnStart = true,
+                BotId = 0,
+            },
+            app.Services.GetService<IServiceProvider>());
+            prBotInstance.OnLogCommon += PrBotInstance_OnLogCommon;
+            prBotInstance.OnLogError += PrBotInstance_OnLogError;
+            await prBotInstance.Start();
 
             app.Run();
         }

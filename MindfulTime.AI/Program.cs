@@ -1,6 +1,7 @@
-
+using MassTransit;
 using MindfulTime.AI.Interfaces;
 using MindfulTime.AI.Services;
+using System.Reflection;
 
 namespace MindfulTime.AI
 {
@@ -18,6 +19,12 @@ namespace MindfulTime.AI
                 var isCreated = MLBuilderService.CreateNewMLModel();
                 if (!isCreated) throw new Exception("Ошибка создания модели");
             }
+            builder.Services.AddTransient<IHttpRequestService, HttpRequestService>();
+            builder.Services.AddMassTransit(o =>
+            {
+                o.AddConsumers(Assembly.GetEntryAssembly());
+                o.UsingRabbitMq((context, cfg) => cfg.ConfigureEndpoints(context));
+            });
 
             builder.Services.AddSingleton<IRecomendationService, RecomendationService>();
             builder.Services.AddControllers();
