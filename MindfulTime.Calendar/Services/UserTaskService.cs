@@ -1,21 +1,32 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using MindfulTime.Calendar.Domain.Repository.Entities;
 using MindfulTime.Calendar.Domain.Repository.Interfaces;
 using MindfulTime.Calendar.DTO;
 using MindfulTime.Calendar.Interfaces;
 using OpenClasses.Calendar;
+using OpenClasses.Machine;
 using OpenClasses.Notification;
 
 namespace MindfulTime.Calendar.Services
 {
-    public class UserTaskService(IBaseRepository<UserTask> repository) : IUserTaskService
+    public class UserTaskService(IBaseRepository<UserTask> repository, IPublishEndpoint publish) : IUserTaskService
     {
         private readonly IBaseRepository<UserTask> _repository = repository;
+        private readonly IPublishEndpoint _publishEndpoint = publish;
         public async Task<BaseResponse<EventDTO>> CreateTask(EventDTO _event)
         {
             var modelTask = Mapper(_event);
             var result = await _repository.CreateAsync(modelTask);
             if (result.IsError) return new BaseResponse<EventDTO>() { ErrorMessage = result.ErrorMessage };
+            var publishUserTask = new UserEventMT
+            {
+                StorePoint = float.TryParse(modelTask.StorePoint.ToString(), out var storePoint) ? storePoint : 0,
+                Temperature = 0,
+                UserId = modelTask.UserId,
+                WeatherType = string.Empty,
+            };
+            await _publishEndpoint.Publish(publishUserTask);
             return new BaseResponse<EventDTO>() { Data = _event };
         }
 

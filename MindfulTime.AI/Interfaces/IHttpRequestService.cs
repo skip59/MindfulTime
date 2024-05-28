@@ -2,6 +2,6 @@
 {
     public interface IHttpRequestService
     {
-        public Task<string> HttpRequest(string URL, StringContent content)
+        public Task<string> HttpRequest(string URL, StringContent content);
     }
 }

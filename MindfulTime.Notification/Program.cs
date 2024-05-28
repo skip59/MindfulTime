@@ -5,6 +5,7 @@ using PRTelegramBot.Core;
 using PRTelegramBot.Extensions;
 using System.Reflection;
 
+
 namespace MindfulTime.Notification
 {
     public class Program
@@ -18,7 +19,10 @@ namespace MindfulTime.Notification
             builder.Services.AddMassTransit(o =>
             {
                 o.AddConsumers(Assembly.GetEntryAssembly());
-                o.UsingRabbitMq((context, cfg) => cfg.ConfigureEndpoints(context));
+                o.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.ConfigureEndpoints(context);
+                });
             });
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

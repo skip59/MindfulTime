@@ -7,10 +7,11 @@ using OpenClasses.Weather;
 
 namespace MindfulTime.AI.Consumers
 {
-    public class UserEventQueue(IRecomendationService recomendationService, IHttpRequestService httpRequest) : IConsumer<UserEventMT>
+    public class UserEventQueue(IRecomendationService recomendationService, IHttpRequestService httpRequest, IPublishEndpoint publish) : IConsumer<UserEventMT>
     {
         private readonly IRecomendationService recomendationService = recomendationService;
         private readonly IHttpRequestService httpRequestService = httpRequest;
+        private readonly IPublishEndpoint publishEndpoint = publish;
         public async Task Consume(ConsumeContext<UserEventMT> context)
         {
             try
@@ -38,6 +39,7 @@ namespace MindfulTime.AI.Consumers
                     Temperature = model.Temperature,
                     WeatherType = model.WeatherType
                 };
+               await publishEndpoint.Publish(resultModel);
             }
             catch (Exception ex)
             {
