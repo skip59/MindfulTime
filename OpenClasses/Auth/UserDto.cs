@@ -10,5 +10,7 @@ namespace OpenClasses.Auth
         public string Password { get; set; }
         public string Name { get; set; }
         public string Role { get; set; }
+        public string TelegramId { get; set; }
+        public bool IsSendMessage { get; set; }
     }
 }

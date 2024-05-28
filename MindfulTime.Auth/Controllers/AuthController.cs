@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MindfulTime.Auth.Interfaces;
+using MindfulTime.Auth.Application.Interfaces;
 using OpenClasses.Auth;
 
 namespace MindfulTime.Auth.Controllers

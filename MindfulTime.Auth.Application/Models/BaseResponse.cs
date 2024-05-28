@@ -1,4 +1,4 @@
-﻿namespace MindfulTime.Auth.DTO
+﻿namespace MindfulTime.Auth.Application.Models
 {
     public class BaseResponse<T>
     {

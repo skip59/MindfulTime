@@ -1,7 +1,7 @@
-﻿using MindfulTime.Auth.DTO;
+﻿using MindfulTime.Auth.Application.Models;
 using OpenClasses.Auth;
 
-namespace MindfulTime.Auth.Interfaces
+namespace MindfulTime.Auth.Application.Interfaces
 {
     public interface IUserService
     {

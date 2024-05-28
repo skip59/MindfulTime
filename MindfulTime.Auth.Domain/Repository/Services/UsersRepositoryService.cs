@@ -10,7 +10,7 @@ namespace MindfulTime.Auth.Domain.Repository.Services
         {
             try
             {
-                _context.Users.Add(entity);
+                await _context.Users.AddAsync(entity);
                 await _context.SaveChangesAsync();
                 return new BaseResponse<User> { Data = _context.Users.Single(x => x.Id == entity.Id) };
             }
@@ -40,11 +40,11 @@ namespace MindfulTime.Auth.Domain.Repository.Services
         {
             try
             {
-                return _context.Users.Select(x => x);
+                return _context.Users;
             }
             catch (Exception)
             {
-                return null!;
+                return null;
             }
 
         }

@@ -1,6 +1,6 @@
 using MassTransit;
 using MindfulTime.Auth.Domain.DI;
-using MindfulTime.Auth.Interfaces;
+using MindfulTime.Auth.Application.Interfaces;
 using MindfulTime.Auth.Services;
 
 namespace MindfulTime.Auth

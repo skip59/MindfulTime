@@ -31,7 +31,5 @@ namespace MindfulTime.Auth.Domain.Repository
             }
 
         }
-
-
     }
 }

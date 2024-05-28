@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MindfulTime.Auth.Domain\MindfulTime.Auth.Domain.csproj" />
+    <ProjectReference Include="..\MindfulTime.Auth.Application\MindfulTime.Auth.Application.csproj" />
     <ProjectReference Include="..\OpenClasses\OpenClasses.csproj" />
   </ItemGroup>
 
