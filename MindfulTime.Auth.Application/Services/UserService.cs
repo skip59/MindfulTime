@@ -7,9 +7,8 @@ using MindfulTime.Auth.Application.Interfaces;
 using OpenClasses.Auth;
 using OpenClasses.Calendar;
 using OpenClasses.Notification;
-using MindfulTime.Auth.Application.Services;
 
-namespace MindfulTime.Auth.Services
+namespace MindfulTime.Auth.Application.Services
 {
     public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint publishEndpoint) : IUserService
     {
