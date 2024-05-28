@@ -1,4 +1,4 @@
-﻿namespace MindfulTime.Calendar.DTO
+﻿namespace MindfulTime.Notification.Application.Models
 {
     public class BaseResponse<T>
     {

@@ -2,13 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using MindfulTime.Calendar.Domain.Repository.Entities;
 using MindfulTime.Calendar.Domain.Repository.Interfaces;
-using MindfulTime.Calendar.DTO;
-using MindfulTime.Calendar.Interfaces;
+using MindfulTime.Calendar.Application.Models;
+using MindfulTime.Calendar.Application.Interfaces;
 using OpenClasses.Calendar;
 using OpenClasses.Machine;
 using OpenClasses.Notification;
 
-namespace MindfulTime.Calendar.Services
+namespace MindfulTime.Calendar.Application.Services
 {
     public class UserTaskService(IBaseRepository<UserTask> repository, IPublishEndpoint publish) : IUserTaskService
     {

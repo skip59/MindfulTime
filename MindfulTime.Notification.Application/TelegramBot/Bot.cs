@@ -1,9 +1,9 @@
-﻿using MindfulTime.Notification.TelegramBot.Models;
+﻿using MindfulTime.Notification.Application.TelegramBot.Models;
 using PRTelegramBot.Attributes;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace MindfulTime.Notification.TelegramBot
+namespace MindfulTime.Notification.Application.TelegramBot
 {
     public static class Sender
     {

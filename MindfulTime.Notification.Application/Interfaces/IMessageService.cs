@@ -1,6 +1,6 @@
 ﻿using MindfulTime.Notification.Domain.Repository.Entities;
 
-namespace MindfulTime.Notification.Interfaces
+namespace MindfulTime.Notification.Application.Interfaces
 {
     public interface IMessageService
     {

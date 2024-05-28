@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MindfulTime.Calendar.Interfaces;
+using MindfulTime.Calendar.Application.Interfaces;
 using OpenClasses.Calendar;
 using OpenClasses.Notification;
 

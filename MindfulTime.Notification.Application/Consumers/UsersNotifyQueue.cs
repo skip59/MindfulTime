@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using MindfulTime.Notification.Domain.Repository.Entities;
 using MindfulTime.Notification.Domain.Repository.Interfaces;
 using MindfulTime.Notification.Domain.Repository.Services;
-using MindfulTime.Notification.TelegramBot;
-using MindfulTime.Notification.TelegramBot.Models;
+using MindfulTime.Notification.Application.TelegramBot;
+using MindfulTime.Notification.Application.TelegramBot.Models;
 using Newtonsoft.Json;
 using OpenClasses.Machine;
 using OpenClasses.Notification;
 
-namespace MindfulTime.Calendar.Consumers
+namespace MindfulTime.Calendar.Application.Consumers
 {
     public class UsersNotifyQueue(UserNotificationRepositoryService repository, IBaseRepository<Message> baseRepository) : IConsumer<NUserMT>, IConsumer<NUser_del_MT>, IConsumer<NUser_upd_MT>, IConsumer<UserEvent_out_MT>
     {

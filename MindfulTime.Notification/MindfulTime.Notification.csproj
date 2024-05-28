@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MindfulTime.Notification.Domain\MindfulTime.Notification.Domain.csproj" />
+    <ProjectReference Include="..\MindfulTime.Notification.Application\MindfulTime.Notification.Application.csproj" />
     <ProjectReference Include="..\OpenClasses\OpenClasses.csproj" />
   </ItemGroup>
 

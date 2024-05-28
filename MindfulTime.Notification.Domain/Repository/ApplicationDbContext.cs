@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MindfulTime.Notification.Domain.Services;
 using MindfulTime.Notification.Domain.Repository.Entities;
 
 namespace MindfulTime.Notification.Domain.Repository
@@ -24,7 +25,7 @@ namespace MindfulTime.Notification.Domain.Repository
                     Id = Guid.Parse("242d4794-a0c5-4b23-af6b-dff338ca9b80"),
                     Email = "admin@gmail.ru",
                     Name = "Admin",
-                    Password = "Admin",
+                    Password = CryptoService.HashPassword("Admin"),
                     Role = "Admin"
                 };
                 Users.Add(user);

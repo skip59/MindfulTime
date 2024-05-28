@@ -2,7 +2,7 @@
 using MindfulTime.Calendar.Domain.Repository.Services;
 using OpenClasses.Calendar;
 
-namespace MindfulTime.Calendar.Consumers
+namespace MindfulTime.Calendar.Application.Consumers
 {
     public class UsersQueue(UserCalendarRepositoryService repository) : IConsumer<UserMT>, IConsumer<User_del_MT>, IConsumer<User_upd_MT>
     {

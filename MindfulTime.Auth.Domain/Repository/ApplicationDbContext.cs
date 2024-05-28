@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MindfulTime.Auth.Domain.Repository.Entities;
+using MindfulTime.Auth.Domain.Services;
 
 namespace MindfulTime.Auth.Domain.Repository
 {
@@ -23,7 +24,7 @@ namespace MindfulTime.Auth.Domain.Repository
                     Id = Guid.Parse("242d4794-a0c5-4b23-af6b-dff338ca9b80"),
                     Email = "admin@gmail.ru",
                     Name = "Admin",
-                    Password = "Admin",
+                    Password = CryptoService.HashPassword("Admin"),
                     Role = "Admin"
                 };
                 Users.Add(user);

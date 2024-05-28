@@ -58,7 +58,9 @@ namespace MindfulTime.Calendar.Domain.Repository.Services
                 Id = userMt.Id,
                 Name = userMt.Name,
                 Password = userMt.Password,
-                Role = userMt.Role
+                Role = userMt.Role,
+                IsSendMessage = userMt.IsSendMessage,
+                TelegramId = userMt.TelegramId
             },
             User_del_MT userDelMt => new User
             {
@@ -66,7 +68,9 @@ namespace MindfulTime.Calendar.Domain.Repository.Services
                 Id = userDelMt.Id,
                 Name = userDelMt.Name,
                 Password = userDelMt.Password,
-                Role = userDelMt.Role
+                Role = userDelMt.Role,
+                IsSendMessage = userDelMt.IsSendMessage,
+                TelegramId=userDelMt.TelegramId
             },
             User_upd_MT userUpdMt => new User
             {
@@ -74,7 +78,9 @@ namespace MindfulTime.Calendar.Domain.Repository.Services
                 Id = userUpdMt.Id,
                 Name = userUpdMt.Name,
                 Password = userUpdMt.Password,
-                Role = userUpdMt.Role
+                Role = userUpdMt.Role,
+                IsSendMessage= userUpdMt.IsSendMessage,
+                TelegramId = userUpdMt.TelegramId
             },
             _ => null,
         };

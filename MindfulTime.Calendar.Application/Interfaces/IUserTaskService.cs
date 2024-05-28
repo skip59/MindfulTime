@@ -1,8 +1,8 @@
-﻿using MindfulTime.Calendar.DTO;
+﻿using MindfulTime.Calendar.Application.Models;
 using OpenClasses.Calendar;
 using OpenClasses.Notification;
 
-namespace MindfulTime.Calendar.Interfaces
+namespace MindfulTime.Calendar.Application.Interfaces
 {
     public interface IUserTaskService
     {

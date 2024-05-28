@@ -1,7 +1,7 @@
 using MassTransit;
 using MindfulTime.Calendar.Domain.DI;
-using MindfulTime.Calendar.Interfaces;
-using MindfulTime.Calendar.Services;
+using MindfulTime.Calendar.Application.Interfaces;
+using MindfulTime.Calendar.Application.Services;
 using System.Reflection;
 
 namespace MindfulTime.Calendar

@@ -1,4 +1,4 @@
-﻿namespace MindfulTime.Notification.TelegramBot.Models
+﻿namespace MindfulTime.Notification.Application.TelegramBot.Models
 {
     public class SendModel
     {

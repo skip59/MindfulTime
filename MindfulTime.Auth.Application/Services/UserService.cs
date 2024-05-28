@@ -7,6 +7,7 @@ using MindfulTime.Auth.Application.Interfaces;
 using OpenClasses.Auth;
 using OpenClasses.Calendar;
 using OpenClasses.Notification;
+using MindfulTime.Auth.Application.Services;
 
 namespace MindfulTime.Auth.Services
 {
@@ -14,20 +15,25 @@ namespace MindfulTime.Auth.Services
     {
         private readonly IBaseRepository<User> _userRepository = userRepository;
         private readonly IPublishEndpoint _publishEndpoint = publishEndpoint;
+
         public async Task<BaseResponse<UserDto>> CreateUser(UserDto user)
         {
+            var cryptPassword = CryptoService.HashPassword(user.Password);
+
             var userFromDb = await _userRepository.ReadAsync().SingleOrDefaultAsync(x=> x.Email == user.Email);
             if (userFromDb != null) return new BaseResponse<UserDto> { ErrorMessage = $"Пользователь с {user.Email} уже есть в базе данных. Создание пользователя не возможно." };
+
             var userToDb = new User()
             {
                 Email = user.Email,
                 Id = Guid.NewGuid(),
                 Name = user.Name,
-                Password = user.Password,
+                Password = cryptPassword,
                 Role = user.Role,
                 TelegramId = user.TelegramId,
                 IsSendMessage = user.IsSendMessage
             };
+
             var result = await _userRepository.CreateAsync(userToDb);
             if (result.IsError) return new BaseResponse<UserDto> { ErrorMessage = result.ErrorMessage };
 
@@ -79,6 +85,7 @@ namespace MindfulTime.Auth.Services
             
             var result = await _userRepository.DeleteAsync(userFromDb);
             if (result.IsError) return new BaseResponse<UserDto> { ErrorMessage = result.ErrorMessage };
+
             User_del_MT PublishUserToCalendarDb = new()
             {
                 Email = userFromDb.Email,
@@ -121,21 +128,26 @@ namespace MindfulTime.Auth.Services
 
         public async Task<BaseResponse<UserDto>> ReadUser(UserDto user)
         {
-            var userFromDb = await _userRepository.ReadAsync().SingleOrDefaultAsync(x => x.Email == user.Email && x.Password == user.Password);
+
+            var userFromDb = await _userRepository.ReadAsync().SingleOrDefaultAsync(x => x.Email == user.Email);
+            
             if (userFromDb!= null)
             {
-                UserDto userDto = new()
+                var passIsVerify = CryptoService.VerifyPassword(user.Password, userFromDb.Password);
+                if (passIsVerify)
                 {
-                    Id = userFromDb.Id,
-                    Role = userFromDb.Role,
-                    Name = userFromDb.Name,
-                    Email = userFromDb.Email,
-                    TelegramId=userFromDb.TelegramId,
-                    IsSendMessage=userFromDb.IsSendMessage,
-                    Password = userFromDb.Password
-                };
-                return new BaseResponse<UserDto>() { Data = userDto };
-
+                    UserDto userDto = new()
+                    {
+                        Id = userFromDb.Id,
+                        Role = userFromDb.Role,
+                        Name = userFromDb.Name,
+                        Email = userFromDb.Email,
+                        TelegramId=userFromDb.TelegramId,
+                        IsSendMessage=userFromDb.IsSendMessage,
+                        Password = userFromDb.Password
+                    };
+                    return new BaseResponse<UserDto>() { Data = userDto };
+                }
             }
             return new BaseResponse<UserDto>() { ErrorMessage = "Пользователь не найден." };
         }
@@ -143,27 +155,30 @@ namespace MindfulTime.Auth.Services
         public async Task<BaseResponse<List<UserDto>>> ReadAllUsers(UserDto user)
         {
             var usersFromDb = await _userRepository.ReadAsync().ToListAsync();
-            var mainUser = usersFromDb.SingleOrDefault(x => x.Id == user.Id && x.Role == user.Role && x.Password == user.Password);
+            var mainUser = usersFromDb.SingleOrDefault(x => x.Id == user.Id && x.Role == user.Role);
             if (mainUser!= null)
             {
-                List<UserDto> users = [];
-                foreach (var _user in usersFromDb)
+                var passIsVerify = CryptoService.VerifyPassword(user.Password, mainUser.Password);
+                if (passIsVerify)
                 {
-                    UserDto userDto = new()
+                    List<UserDto> users = [];
+                    foreach (var _user in usersFromDb)
                     {
-                        Id = _user.Id,
-                        Role = _user.Role,
-                        Name = _user.Name,
-                        Email = _user.Email,
-                        IsSendMessage = _user.IsSendMessage,
-                        TelegramId = _user.TelegramId,
-                        Password = _user.Password
-                    };
-                    users.Add(userDto);
-                }
-                
-                return new BaseResponse<List<UserDto>>() { Data = users };
+                        UserDto userDto = new()
+                        {
+                            Id = _user.Id,
+                            Role = _user.Role,
+                            Name = _user.Name,
+                            Email = _user.Email,
+                            IsSendMessage = _user.IsSendMessage,
+                            TelegramId = _user.TelegramId,
+                            Password = _user.Password
+                        };
+                        users.Add(userDto);
+                    }
 
+                    return new BaseResponse<List<UserDto>>() { Data = users };
+                }
             }
             return new BaseResponse<List<UserDto>>() { ErrorMessage = "Не авторизованный запрос." };
         }
@@ -172,6 +187,7 @@ namespace MindfulTime.Auth.Services
         {
             var userFromDb = await _userRepository.ReadAsync().SingleOrDefaultAsync(x => x.Email == user.Email);
             if (userFromDb == null) return new BaseResponse<UserDto> { ErrorMessage = $"Пользователь с {user.Email} не найден в базе данных." };
+
             var userToDb = new User()
             {
                 Email = user.Email,
@@ -182,8 +198,10 @@ namespace MindfulTime.Auth.Services
                 TelegramId= user.TelegramId,
                 IsSendMessage= user.IsSendMessage,
             };
+
             var result = await _userRepository.UpdateAsync(userToDb);
             if (result.IsError) return new BaseResponse<UserDto> { ErrorMessage = result.ErrorMessage };
+
             User_upd_MT PublishUserToCalendarDb = new()
             {
                 Email = userToDb.Email,
