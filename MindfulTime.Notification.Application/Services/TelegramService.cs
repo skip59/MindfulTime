@@ -19,7 +19,7 @@ namespace MindfulTime.Notification.Services
                 string msg = $"Привет {update.Message.From.FirstName.ToUpper()}. Добавь на личной странице https://localhost:7033 свой TelegramId: {update.Message.Chat.Id}, чтобы начать получать уведомления.";
                 await PRTelegramBot.Helpers.Message.Send(botClient, update, msg);
                 client = botClient;
-               
+                if(!upd.Any(x=>x.Message.Chat.Id == update.Message.Chat.Id))upd.Add(update);
             }
 
         }
