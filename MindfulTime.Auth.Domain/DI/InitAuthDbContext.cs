@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MindfulTime.Auth.Domain.DI
 {
-    public static class DependencyInjection
+    public static class InitAuthDbContext
     {
         public static void InitDbContext(this IServiceCollection service, string Connection = null!)
         {

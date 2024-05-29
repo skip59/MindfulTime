@@ -1,20 +1,21 @@
 ﻿using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using MindfulTime.Notification.Application.Interfaces;
+using MindfulTime.Notification.Application.TelegramBot.Models;
 using MindfulTime.Notification.Domain.Repository.Entities;
 using MindfulTime.Notification.Domain.Repository.Interfaces;
 using MindfulTime.Notification.Domain.Repository.Services;
-using MindfulTime.Notification.Application.TelegramBot;
-using MindfulTime.Notification.Application.TelegramBot.Models;
 using Newtonsoft.Json;
 using OpenClasses.Machine;
 using OpenClasses.Notification;
 
 namespace MindfulTime.Calendar.Application.Consumers
 {
-    public class UsersNotifyQueue(UserNotificationRepositoryService repository, IBaseRepository<Message> baseRepository) : IConsumer<NUserMT>, IConsumer<NUser_del_MT>, IConsumer<NUser_upd_MT>, IConsumer<UserEvent_out_MT>
+    public class UsersNotifyQueue(UserNotificationRepositoryService repository, IBaseRepository<Message> baseRepository, IMessageService message) : IConsumer<NUserMT>, IConsumer<NUser_del_MT>, IConsumer<NUser_upd_MT>, IConsumer<UserEvent_out_MT>
     {
         private readonly UserNotificationRepositoryService _repository = repository;
         private readonly IBaseRepository<Message> _baseRepository = baseRepository;
+        private readonly IMessageService _messageService = message;
         public async Task Consume(ConsumeContext<NUserMT> context)
         {
             await _repository.CreateAsync(context.Message);
@@ -52,7 +53,7 @@ namespace MindfulTime.Calendar.Application.Consumers
                     UserId = user.Id,
                     TelegramId = int.TryParse(user.TelegramId, out int result) ? result : 0,
                 };
-                await Sender.SendMessage(sendModel);
+                await _messageService.SendMessage(sendModel);
             };
             return;
         }

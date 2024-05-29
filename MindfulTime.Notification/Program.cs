@@ -1,9 +1,7 @@
-using MassTransit;
-using MindfulTime.Notification.Domain.DI;
+using MindfulTime.Notification.Application.DI;
 using PRTelegramBot.Configs;
 using PRTelegramBot.Core;
 using PRTelegramBot.Extensions;
-using System.Reflection;
 
 
 namespace MindfulTime.Notification
@@ -15,15 +13,8 @@ namespace MindfulTime.Notification
             var builder = WebApplication.CreateBuilder(args);
             string connection = builder.Configuration.GetConnectionString("UserDatabase");
             // Add services to the container.
-            builder.Services.InitDbContext(connection);
-            builder.Services.AddMassTransit(o =>
-            {
-                o.AddConsumers(Assembly.GetEntryAssembly());
-                o.UsingRabbitMq((context, cfg) =>
-                {
-                    cfg.ConfigureEndpoints(context);
-                });
-            });
+            builder.Services.AppNotificationContext(connection);
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

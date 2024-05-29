@@ -1,8 +1,4 @@
-using MassTransit;
-using MindfulTime.Auth.Domain.DI;
-using MindfulTime.Auth.Application.Interfaces;
-using MindfulTime.Auth.Application.Services;
-
+using MindfulTime.Auth.Application.DI;
 namespace MindfulTime.Auth
 {
     public class Program
@@ -11,12 +7,7 @@ namespace MindfulTime.Auth
         {
             var builder = WebApplication.CreateBuilder(args);
             string connection = builder.Configuration.GetConnectionString("UserDatabase");
-            builder.Services.InitDbContext(connection ?? null);
-            builder.Services.AddTransient<IUserService, UserService>();
-            builder.Services.AddMassTransit(o => 
-            { 
-                o.UsingRabbitMq(); 
-            });
+            builder.Services.AppAuthContext(connection);
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
