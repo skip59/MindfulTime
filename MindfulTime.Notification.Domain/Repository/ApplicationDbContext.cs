@@ -1,39 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MindfulTime.Notification.Domain.Services;
-using MindfulTime.Notification.Domain.Repository.Entities;
+﻿namespace MindfulTime.Notification.Infrastructure.Repository;
 
-namespace MindfulTime.Notification.Domain.Repository
+public class ApplicationDbContext : DbContext
 {
-    public class ApplicationDbContext : DbContext
+    public DbSet<UserEntity> Users { get; set; }
+    public DbSet<MessageEntity> Messages { get; set; }
+
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
     {
-        public DbSet<User> Users { get; set; }
-        public DbSet<Message> Messages { get; set; }
+        Database.EnsureCreated();
+        InitBaseRecords();
+    }
+    public void InitBaseRecords()
+    {
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        if (!Users.Any(x => x.Name == "Admin"))
         {
-            Database.EnsureCreated();
-            InitBaseRecords();
-        }
-        public void InitBaseRecords()
-        {
-
-            if (!Users.Any(x => x.Name == "Admin"))
+            var user = new UserEntity
             {
-                var user = new User
-                {
-                    Id = Guid.Parse("242d4794-a0c5-4b23-af6b-dff338ca9b80"),
-                    Email = "admin@gmail.ru",
-                    Name = "Admin",
-                    Password = CryptoService.HashPassword("Admin"),
-                    Role = "Admin"
-                };
-                Users.Add(user);
-                SaveChanges();
-            }
-
+                Id = Guid.Parse("242d4794-a0c5-4b23-af6b-dff338ca9b80"),
+                Email = "admin@gmail.ru",
+                Name = "Admin",
+                Password = CryptoService.HashPassword("Admin"),
+                Role = "Admin"
+            };
+            Users.Add(user);
+            SaveChanges();
         }
-
 
     }
+
+
 }

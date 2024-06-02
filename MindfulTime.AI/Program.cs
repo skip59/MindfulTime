@@ -1,8 +1,3 @@
-using MassTransit;
-using MindfulTime.AI.Interfaces;
-using MindfulTime.AI.Services;
-using System.Reflection;
-
 namespace MindfulTime.AI
 {
     public class Program

@@ -1,4 +1,4 @@
-﻿namespace MindfulTime.Calendar.Application.Models
+﻿namespace MindfulTime.Calendar.Domain.Models
 {
     public class BaseResponse<T>
     {

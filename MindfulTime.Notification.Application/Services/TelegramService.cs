@@ -1,51 +1,44 @@
-﻿using MindfulTime.Notification.Application.Interfaces;
-using MindfulTime.Notification.Application.TelegramBot.Models;
-using PRTelegramBot.Attributes;
-using Telegram.Bot;
-using Telegram.Bot.Types;
+﻿namespace MindfulTime.Notification.Domain.Services;
 
-namespace MindfulTime.Notification.Services
+public class TelegramService : IMessageService
 {
-    public class TelegramService : IMessageService
+    internal static ITelegramBotClient client;
+    internal static List<Update> upd = [];
+    public class TelegramBot()
     {
-        internal static ITelegramBotClient client;
-        internal static List<Update> upd = [];
-        public class TelegramBot()
+        public static Dictionary<string, string> users = [];
+        [ReplyMenuHandler("Бот+")]
+        public async Task StartMenu(ITelegramBotClient botClient, Update update)
         {
-            public static Dictionary<string, string> users = [];
-            [ReplyMenuHandler("Бот+")]
-            public async Task StartMenu(ITelegramBotClient botClient, Update update)
-            {
-                string msg = $"Привет {update.Message.From.FirstName.ToUpper()}. Добавь на личной странице https://localhost:7033 свой TelegramId: {update.Message.Chat.Id}, чтобы начать получать уведомления.";
-                await PRTelegramBot.Helpers.Message.Send(botClient, update, msg);
-                client = botClient;
-                if(!upd.Any(x=>x.Message.Chat.Id == update.Message.Chat.Id))upd.Add(update);
-            }
-
+            string msg = $"Привет {update.Message.From.FirstName.ToUpper()}. Добавь на личной странице https://localhost:7033 свой TelegramId: {update.Message.Chat.Id}, чтобы начать получать уведомления.";
+            await PRTelegramBot.Helpers.Message.Send(botClient, update, msg);
+            client = botClient;
+            if (!upd.Any(x => x.Message.Chat.Id == update.Message.Chat.Id)) upd.Add(update);
         }
-        public async Task<bool> SendMessage(SendModel item)
+
+    }
+    public async Task<bool> SendMessage(SendModel item)
+    {
+        try
         {
-            try
+            if (upd.Count > 0)
             {
-                if (upd.Count > 0)
+                string message = string.Empty;
+                foreach (Update update in upd)
                 {
-                    string message = string.Empty;
-                    foreach (Update update in upd)
+                    if (update.Message.Chat.Id == item.TelegramId)
                     {
-                        if (update.Message.Chat.Id == item.TelegramId)
-                        {
-                            message = $"{update.Message.From.FirstName}. {item.Message}";
-                            await PRTelegramBot.Helpers.Message.Send(client, update, message);
-                        }
+                        message = $"{update.Message.From.FirstName}. {item.Message}";
+                        await PRTelegramBot.Helpers.Message.Send(client, update, message);
                     }
-                    return true;
                 }
-                return false;
+                return true;
             }
-            catch (Exception)
-            {
-                return false;
-            }
+            return false;
+        }
+        catch (Exception)
+        {
+            return false;
         }
     }
 }

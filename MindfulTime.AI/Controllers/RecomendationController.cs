@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace MindfulTime.AI.Controllers
 {
     [Route("api/[action]")]
