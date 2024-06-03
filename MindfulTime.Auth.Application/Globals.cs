@@ -1,0 +1,12 @@
+﻿global using Microsoft.Extensions.DependencyInjection;
+global using MindfulTime.Auth.Infrastructure.Repository;
+global using Microsoft.EntityFrameworkCore;
+global using MindfulTime.Auth.Infrastructure.Entities;
+global using MindfulTime.Auth.Domain.Interfaces;
+global using MindfulTime.Auth.Domain.Services;
+global using MassTransit;
+global using MindfulTime.Auth.Infrastructure.Crypto;
+global using OpenClasses.Auth;
+global using OpenClasses.Calendar;
+global using OpenClasses.Notification;
+global using MindfulTime.Auth.Domain.Models;

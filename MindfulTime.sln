@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Auth", "MindfulTime.Auth\MindfulTime.Auth.csproj", "{FA4ECC3C-B5E1-415C-98FB-587AB227E7B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Auth.App", "MindfulTime.Auth\MindfulTime.Auth.App.csproj", "{FA4ECC3C-B5E1-415C-98FB-587AB227E7B2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Calendar", "MindfulTime.Calendar\MindfulTime.Calendar.csproj", "{265731DC-118F-42A5-9926-99CF5D02B841}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Calendar.App", "MindfulTime.Calendar\MindfulTime.Calendar.App.csproj", "{265731DC-118F-42A5-9926-99CF5D02B841}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Weather", "MindfulTime.Weather\MindfulTime.Weather.csproj", "{5EBEF905-9BAB-417D-8603-825CD49DE778}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.AI", "MindfulTime.AI\MindfulTime.AI.csproj", "{1D5DAF10-4FB0-4AD2-A33D-7C77DFC7F461}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Notification", "MindfulTime.Notification\MindfulTime.Notification.csproj", "{DC0A1E8D-8B3E-4364-A1F6-C14C0CB72E06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Notification.App", "MindfulTime.Notification\MindfulTime.Notification.App.csproj", "{DC0A1E8D-8B3E-4364-A1F6-C14C0CB72E06}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MindfulTime.AuthorizationService", "MindfulTime.AuthorizationService", "{B8A35F25-7B49-4B15-81F8-C477FB8DF1BB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Auth.Domain", "MindfulTime.Auth.Domain\MindfulTime.Auth.Domain.csproj", "{259D758A-53EA-4272-91C6-7AA00A4A3530}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Auth.Infrastructure", "MindfulTime.Auth.Domain\MindfulTime.Auth.Infrastructure.csproj", "{259D758A-53EA-4272-91C6-7AA00A4A3530}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedClasses", "SharedClasses", "{C6825227-8EB1-4F50-8B34-00E85A6F6F53}"
 EndProject
@@ -23,19 +23,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenClasses", "OpenClasses\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MindfulTime.CalendarService", "MindfulTime.CalendarService", "{D7787818-4AF8-40C5-910F-98D615EB72C1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Calendar.Domain", "MindfulTime.Calendar.Domain\MindfulTime.Calendar.Domain.csproj", "{36F767C3-3F75-4DE2-8C02-A96708396330}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Calendar.Infrastructure", "MindfulTime.Calendar.Domain\MindfulTime.Calendar.Infrastructure.csproj", "{36F767C3-3F75-4DE2-8C02-A96708396330}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MindfulTime.NotificationService", "MindfulTime.NotificationService", "{0FC51155-886D-4FBF-9C0A-4096269D0D44}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Notification.Domain", "MindfulTime.Notification.Domain\MindfulTime.Notification.Domain.csproj", "{19DC952E-456C-4E50-8691-93CECC556E11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Notification.Infrastructure", "MindfulTime.Notification.Domain\MindfulTime.Notification.Infrastructure.csproj", "{19DC952E-456C-4E50-8691-93CECC556E11}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MindfulTime.Machine", "MindfulTime.Machine", "{380241A0-973C-4184-A3B8-60F4F32FDF20}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Auth.Application", "MindfulTime.Auth.Application\MindfulTime.Auth.Application.csproj", "{C8B3544E-2080-4C13-B80A-BB3CE1717B52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Auth.Domain", "MindfulTime.Auth.Application\MindfulTime.Auth.Domain.csproj", "{C8B3544E-2080-4C13-B80A-BB3CE1717B52}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Calendar.Application", "MindfulTime.Calendar.Application\MindfulTime.Calendar.Application.csproj", "{2FFC829D-BEE2-4052-AD46-3EC5EEB3BDC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Calendar.Domain", "MindfulTime.Calendar.Application\MindfulTime.Calendar.Domain.csproj", "{2FFC829D-BEE2-4052-AD46-3EC5EEB3BDC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindfulTime.Notification.Application", "MindfulTime.Notification.Application\MindfulTime.Notification.Application.csproj", "{6D4E3BB0-BC43-4C32-83D7-139990B7DF6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Notification.Domain", "MindfulTime.Notification.Application\MindfulTime.Notification.Domain.csproj", "{6D4E3BB0-BC43-4C32-83D7-139990B7DF6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindfulTime.AI.Domain", "MindfulTime.AI.Domain\MindfulTime.AI.Domain.csproj", "{DACC2ED6-6D1E-4929-93E2-ADE58F083772}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{6D4E3BB0-BC43-4C32-83D7-139990B7DF6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D4E3BB0-BC43-4C32-83D7-139990B7DF6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D4E3BB0-BC43-4C32-83D7-139990B7DF6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DACC2ED6-6D1E-4929-93E2-ADE58F083772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DACC2ED6-6D1E-4929-93E2-ADE58F083772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DACC2ED6-6D1E-4929-93E2-ADE58F083772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DACC2ED6-6D1E-4929-93E2-ADE58F083772}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +113,7 @@ Global
 		{C8B3544E-2080-4C13-B80A-BB3CE1717B52} = {B8A35F25-7B49-4B15-81F8-C477FB8DF1BB}
 		{2FFC829D-BEE2-4052-AD46-3EC5EEB3BDC7} = {D7787818-4AF8-40C5-910F-98D615EB72C1}
 		{6D4E3BB0-BC43-4C32-83D7-139990B7DF6C} = {0FC51155-886D-4FBF-9C0A-4096269D0D44}
+		{DACC2ED6-6D1E-4929-93E2-ADE58F083772} = {380241A0-973C-4184-A3B8-60F4F32FDF20}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB171116-F68E-41F1-8688-52C58E94296D}

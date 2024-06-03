@@ -1,0 +1,17 @@
+﻿global using MassTransit;
+global using Microsoft.Extensions.DependencyInjection;
+global using MindfulTime.Notification.Domain.Interfaces;
+global using MindfulTime.Notification.Services;
+global using Microsoft.EntityFrameworkCore;
+global using MindfulTime.Notification.Domain.Repository.Services;
+global using MindfulTime.Notification.Infrastructure.Entities;
+global using MindfulTime.Notification.Infrastructure.Repository;
+global using MindfulTime.Notification.Domain.Consumers;
+global using MindfulTime.Notification.Domain.Models;
+global using Newtonsoft.Json;
+global using OpenClasses.Machine;
+global using OpenClasses.Notification;
+global using PRTelegramBot.Interface;
+global using PRTelegramBot.Attributes;
+global using Telegram.Bot;
+global using Telegram.Bot.Types;

@@ -1,36 +1,31 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MindfulTime.Auth.Domain.Repository.Entities;
-using MindfulTime.Auth.Domain.Services;
+﻿namespace MindfulTime.Auth.Infrastructure.Repository;
 
-namespace MindfulTime.Auth.Domain.Repository
+public class ApplicationDbContext : DbContext
 {
-    public class ApplicationDbContext : DbContext
+    public DbSet<User> Users { get; set; }
+
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
     {
-        public DbSet<User> Users { get; set; }
+        Database.EnsureCreated();
+        InitBaseRecords();
+    }
+    public void InitBaseRecords()
+    {
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        if (!Users.Any(x => x.Name == "Admin"))
         {
-            Database.EnsureCreated();
-            InitBaseRecords();
-        }
-        public void InitBaseRecords()
-        {
-            
-            if (!Users.Any(x => x.Name == "Admin"))
+            var user = new User
             {
-                var user = new User
-                {
-                    Id = Guid.Parse("242d4794-a0c5-4b23-af6b-dff338ca9b80"),
-                    Email = "admin@gmail.ru",
-                    Name = "Admin",
-                    Password = CryptoService.HashPassword("Admin"),
-                    Role = "Admin"
-                };
-                Users.Add(user);
-                SaveChanges();
-            }
-
+                Id = Guid.Parse("242d4794-a0c5-4b23-af6b-dff338ca9b80"),
+                Email = "admin@gmail.ru",
+                Name = "Admin",
+                Password = CryptoService.HashPassword("Admin"),
+                Role = "Admin"
+            };
+            Users.Add(user);
+            SaveChanges();
         }
+
     }
 }

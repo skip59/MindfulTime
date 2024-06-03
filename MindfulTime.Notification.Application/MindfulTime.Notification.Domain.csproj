@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.2.2" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="PRTelegramBot" Version="0.5.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MindfulTime.Notification.Domain\MindfulTime.Notification.Infrastructure.csproj" />
+    <ProjectReference Include="..\OpenClasses\OpenClasses.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\lulit\.nuget\packages\prtelegrambot\0.5.5.1\build\\README.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\lulit\.nuget\packages\prtelegrambot\0.5.5.1\build\\README.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\lulit\.nuget\packages\prtelegrambot\0.5.5.1\build\\README.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\lulit\.nuget\packages\prtelegrambot\0.5.5.1\build\\README.txt" />
+  </ItemGroup>
+
+</Project>
