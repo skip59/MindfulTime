@@ -4,11 +4,14 @@ using MessageEntity = MindfulTime.Notification.Infrastructure.Entities.MessageEn
 
 namespace MindfulTime.Notification.Domain.Consumers;
 
-public class UsersNotifyQueue(UserNotificationRepositoryService repository, IBaseRepository<Message> baseRepository, IMessageService message) : IConsumer<NUserMT>, IConsumer<NUser_del_MT>, IConsumer<NUser_upd_MT>, IConsumer<UserEvent_out_MT>
+public class UsersNotifyQueue(UserNotificationRepositoryService repository, IBaseRepository<Message> baseRepository, IMessageService<MailSendModel> mailMessage, IMessageService<SendModel> tgMessage) 
+    : IConsumer<NUserMT>, IConsumer<NUser_del_MT>, IConsumer<NUser_upd_MT>, IConsumer<UserEvent_out_MT>, IConsumer<UserEvent_out_Mail>
 {
     private readonly UserNotificationRepositoryService _repository = repository;
     private readonly IBaseRepository<Message> _baseRepository = baseRepository;
-    private readonly IMessageService _messageService = message;
+    private readonly IMessageService<MailSendModel> _mailMessageService = mailMessage;
+    private readonly IMessageService<SendModel> _tgMessageService = tgMessage;
+
     public async Task Consume(ConsumeContext<NUserMT> context)
     {
         await _repository.CreateAsync(context.Message);
@@ -35,8 +38,7 @@ public class UsersNotifyQueue(UserNotificationRepositoryService repository, IBas
             MethodSend = "TG",
             Title = "Отправлено"
         };
-        //var repositoryResult = await _baseRepository.CreateAsync(contextToDb);
-        //if (repositoryResult.IsError) return;
+
         var user = await _repository.ReadAsync().SingleOrDefaultAsync(x => x.Id == context.Message.UserId);
         if (user != null)
         {
@@ -46,10 +48,34 @@ public class UsersNotifyQueue(UserNotificationRepositoryService repository, IBas
                 UserId = user.Id,
                 TelegramId = int.TryParse(user.TelegramId, out int result) ? result : 0,
             };
-            await _messageService.SendMessage(sendModel);
+            await _tgMessageService.SendMessage(sendModel);
         };
         return;
     }
 
+    public async Task Consume(ConsumeContext<UserEvent_out_Mail> context)
+    {
 
+        var contextToDb = new MessageEntity
+        {
+            Body = JsonConvert.SerializeObject(context.Message),
+            Id = Guid.NewGuid(),
+            Created = DateTime.Now.ToLocalTime(),
+            MethodSend = "Mail",
+            Title = "Отправлено"
+        };
+
+        var user = await _repository.ReadAsync().SingleOrDefaultAsync(x => x.Id == context.Message.UserId);
+        if (user != null)
+        {
+            MailSendModel sendModel = new()
+            {
+                Message = context.Message.Recomendation,
+                UserId = user.Id,
+                Mail = user.Email,
+            };
+            await _mailMessageService.SendMessage(sendModel);
+        };
+        return;
+    }
 }

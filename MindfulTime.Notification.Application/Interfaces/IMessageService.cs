@@ -1,6 +1,6 @@
 ﻿namespace MindfulTime.Notification.Domain.Interfaces;
 
-public interface IMessageService
+public interface IMessageService<T> where T : class
 {
-    public Task<bool> SendMessage(SendModel user);
+    public Task<bool> SendMessage(T user);
 }
