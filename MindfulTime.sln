@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Auth.App", "Min
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Calendar.App", "MindfulTime.Calendar\MindfulTime.Calendar.App.csproj", "{265731DC-118F-42A5-9926-99CF5D02B841}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Weather", "MindfulTime.Weather\MindfulTime.Weather.csproj", "{5EBEF905-9BAB-417D-8603-825CD49DE778}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Weather.Api", "MindfulTime.Weather\MindfulTime.Weather.Api.csproj", "{5EBEF905-9BAB-417D-8603-825CD49DE778}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.AI", "MindfulTime.AI\MindfulTime.AI.csproj", "{1D5DAF10-4FB0-4AD2-A33D-7C77DFC7F461}"
 EndProject
@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MindfulTime.AuthorizationSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Auth.Infrastructure", "MindfulTime.Auth.Domain\MindfulTime.Auth.Infrastructure.csproj", "{259D758A-53EA-4272-91C6-7AA00A4A3530}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedClasses", "SharedClasses", "{C6825227-8EB1-4F50-8B34-00E85A6F6F53}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MindfulTime.DBM", "MindfulTime.DBM", "{C6825227-8EB1-4F50-8B34-00E85A6F6F53}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenClasses", "OpenClasses\OpenClasses.csproj", "{2086F85D-6B24-4894-AC17-FB10267F93A5}"
 EndProject
@@ -37,7 +37,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Calendar.Domain
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Notification.Domain", "MindfulTime.Notification.Application\MindfulTime.Notification.Domain.csproj", "{6D4E3BB0-BC43-4C32-83D7-139990B7DF6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindfulTime.AI.Domain", "MindfulTime.AI.Domain\MindfulTime.AI.Domain.csproj", "{DACC2ED6-6D1E-4929-93E2-ADE58F083772}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.AI.Domain", "MindfulTime.AI.Domain\MindfulTime.AI.Domain.csproj", "{DACC2ED6-6D1E-4929-93E2-ADE58F083772}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MindfulTie.Weather", "MindfulTie.Weather", "{E206EB7F-F702-41C9-A630-420416B8D2C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinfulTTime.Weather.Core", "MinfulTTime.Weather.Core\MinfulTTime.Weather.Core.csproj", "{FAB1E1EC-8444-47D0-A8C1-5527E543D710}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +101,10 @@ Global
 		{DACC2ED6-6D1E-4929-93E2-ADE58F083772}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DACC2ED6-6D1E-4929-93E2-ADE58F083772}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DACC2ED6-6D1E-4929-93E2-ADE58F083772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAB1E1EC-8444-47D0-A8C1-5527E543D710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAB1E1EC-8444-47D0-A8C1-5527E543D710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAB1E1EC-8444-47D0-A8C1-5527E543D710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAB1E1EC-8444-47D0-A8C1-5527E543D710}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +112,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{FA4ECC3C-B5E1-415C-98FB-587AB227E7B2} = {B8A35F25-7B49-4B15-81F8-C477FB8DF1BB}
 		{265731DC-118F-42A5-9926-99CF5D02B841} = {D7787818-4AF8-40C5-910F-98D615EB72C1}
+		{5EBEF905-9BAB-417D-8603-825CD49DE778} = {E206EB7F-F702-41C9-A630-420416B8D2C4}
 		{1D5DAF10-4FB0-4AD2-A33D-7C77DFC7F461} = {380241A0-973C-4184-A3B8-60F4F32FDF20}
 		{DC0A1E8D-8B3E-4364-A1F6-C14C0CB72E06} = {0FC51155-886D-4FBF-9C0A-4096269D0D44}
 		{259D758A-53EA-4272-91C6-7AA00A4A3530} = {B8A35F25-7B49-4B15-81F8-C477FB8DF1BB}
@@ -114,6 +123,7 @@ Global
 		{2FFC829D-BEE2-4052-AD46-3EC5EEB3BDC7} = {D7787818-4AF8-40C5-910F-98D615EB72C1}
 		{6D4E3BB0-BC43-4C32-83D7-139990B7DF6C} = {0FC51155-886D-4FBF-9C0A-4096269D0D44}
 		{DACC2ED6-6D1E-4929-93E2-ADE58F083772} = {380241A0-973C-4184-A3B8-60F4F32FDF20}
+		{FAB1E1EC-8444-47D0-A8C1-5527E543D710} = {E206EB7F-F702-41C9-A630-420416B8D2C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB171116-F68E-41F1-8688-52C58E94296D}

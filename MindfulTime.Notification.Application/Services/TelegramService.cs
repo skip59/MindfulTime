@@ -4,9 +4,11 @@ public class TelegramService : IMessageService<SendModel>
 {
     internal static ITelegramBotClient client;
     internal static List<Update> upd = [];
+
     public class TelegramBot()
     {
         public static Dictionary<string, string> users = [];
+
         [ReplyMenuHandler("Бот+")]
         public async Task StartMenu(ITelegramBotClient botClient, Update update)
         {
@@ -17,6 +19,7 @@ public class TelegramService : IMessageService<SendModel>
         }
 
     }
+
     public async Task<bool> SendMessage(SendModel item)
     {
         try
