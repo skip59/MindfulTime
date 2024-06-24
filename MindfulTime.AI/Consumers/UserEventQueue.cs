@@ -1,10 +1,11 @@
 ﻿namespace MindfulTime.AI.Consumers;
 
-public class UserEventQueue(IRecomendationService recomendationService, IHttpRequestService httpRequest, IPublishEndpoint publish) : IConsumer<UserEventMT>
+public class UserEventQueue(IRecomendationService recomendationService, IHttpRequestService httpRequest, IPublishEndpoint publish, ILogger<UserEventQueue> logger) : IConsumer<UserEventMT>
 {
     private readonly IRecomendationService recomendationService = recomendationService;
     private readonly IHttpRequestService httpRequestService = httpRequest;
     private readonly IPublishEndpoint publishEndpoint = publish;
+    private readonly ILogger<UserEventQueue> _logger;
     public async Task Consume(ConsumeContext<UserEventMT> context)
     {
         try
@@ -36,7 +37,7 @@ public class UserEventQueue(IRecomendationService recomendationService, IHttpReq
         }
         catch (Exception ex)
         {
-
+            _logger.LogWarning(ex, "Не удалось получить рекомендацию.");
         }
         
     }
