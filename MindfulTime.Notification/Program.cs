@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
+
 namespace MindfulTime.Notification;
 
 public class Program
@@ -13,6 +16,9 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddHealthChecks().AddCheck<NotificationServiceHealthCheck>(nameof(NotificationServiceHealthCheck));
+
         builder.Services.AddTransientBotHandlers();
         void PrBotInstance_OnLogError(Exception ex, long? id)
         {
@@ -36,8 +42,12 @@ public class Program
 
         app.UseAuthorization();
 
-
         app.MapControllers();
+
+        app.MapHealthChecks("/health", new HealthCheckOptions()
+        {
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        });
 
         var prBotInstance = new PRBot(new TelegramConfig
         {

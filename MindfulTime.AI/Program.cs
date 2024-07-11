@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
+
 namespace MindfulTime.AI
 {
     public class Program
@@ -27,6 +30,8 @@ namespace MindfulTime.AI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddHealthChecks().AddCheck<AIServiceHealthCheck>(nameof(AIServiceHealthCheck));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -42,6 +47,11 @@ namespace MindfulTime.AI
 
 
             app.MapControllers();
+
+            app.MapHealthChecks("/health", new HealthCheckOptions()
+            {
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
 
             app.Run();
         }

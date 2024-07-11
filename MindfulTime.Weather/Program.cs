@@ -1,4 +1,5 @@
-
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using MindfulTime.Weather.Interfaces;
 using MindfulTime.Weather.Services;
 
@@ -18,6 +19,8 @@ namespace MindfulTime.Weather
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddHealthChecks().AddCheck<WeatherServiceHealthCheck>(nameof(WeatherServiceHealthCheck));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -33,6 +36,11 @@ namespace MindfulTime.Weather
 
 
             app.MapControllers();
+
+            app.MapHealthChecks("/health", new HealthCheckOptions()
+            {
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
 
             app.Run();
         }

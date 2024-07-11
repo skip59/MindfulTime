@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
+
 namespace MindfulTime.Auth;
 
 public class Program
@@ -10,6 +13,8 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        builder.Services.AddHealthChecks().AddCheck<AuthServiceHealthCheck>(nameof(AuthServiceHealthCheck));
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -24,6 +29,11 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
+
+        app.MapHealthChecks("/health", new HealthCheckOptions()
+        {
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        });
 
         app.Run();
     }
