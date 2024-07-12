@@ -1,23 +1,23 @@
 ﻿namespace MindfulTime.Notification.Domain.Repository.Services;
 
-public class NotificationRepositoryService : IBaseRepository<Message>
+public class NotificationRepositoryService : IBaseRepository<MessageResultEntity>
 {
-    public Task<BaseResponse<Message>> CreateAsync(Message entity)
+    public Task<BaseResponse<MessageResultEntity>> CreateAsync(MessageResultEntity entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<BaseResponse<Message>> DeleteAsync(Message entity)
+    public Task<BaseResponse<MessageResultEntity>> DeleteAsync(MessageResultEntity entity)
     {
         throw new NotImplementedException();
     }
 
-    public IQueryable<Message> ReadAsync()
+    public IQueryable<MessageResultEntity> ReadAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<BaseResponse<Message>> UpdateAsync(Message entity)
+    public Task<BaseResponse<MessageResultEntity>> UpdateAsync(MessageResultEntity entity)
     {
         throw new NotImplementedException();
     }

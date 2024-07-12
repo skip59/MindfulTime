@@ -180,11 +180,11 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
         var userToDb = new User()
         {
             Email = user.Email,
-            Id = user.Id,
-            Name = user.Name,
-            Password = user.Password,
-            Role = user.Role,
-            TelegramId = user.TelegramId,
+            Id = user.Id == Guid.Empty ? userFromDb.Id : user.Id,
+            Name = string.IsNullOrEmpty(user.Name) ? userFromDb.Name : user.Name,
+            Password = string.IsNullOrEmpty(user.Password) ? userFromDb.Password : user.Password,
+            Role = string.IsNullOrEmpty(user.Role) ? userFromDb.Role : user.Role,
+            TelegramId = string.IsNullOrEmpty(user.TelegramId) ? userFromDb.TelegramId : user.TelegramId,
             IsSendMessage = user.IsSendMessage,
         };
 

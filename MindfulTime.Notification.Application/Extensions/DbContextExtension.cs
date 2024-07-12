@@ -10,6 +10,6 @@ public static class DependencyInjection
         if (string.IsNullOrEmpty(Connection)) return;
         service.AddDbContext<ApplicationDbContext>(o => o.UseNpgsql(Connection));
         service.AddTransient<UserNotificationRepositoryService>();
-        service.AddTransient<IBaseRepository<Message>, NotificationRepositoryService>();
+        service.AddTransient<IBaseRepository<MessageResultEntity>, NotificationRepositoryService>();
     }
 }
