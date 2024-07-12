@@ -44,7 +44,7 @@ public class UsersNotifyQueue(UserNotificationRepositoryService repository,
             {
                 Body = JsonConvert.SerializeObject(context.Message),
                 Id = Guid.NewGuid(),
-                Created = DateTime.Now.ToLocalTime(),
+                Created = DateTime.UtcNow,
                 UserName = user.Name,
                 UserEmail = user.Email,
                 Title = "Отправлено"
@@ -75,8 +75,8 @@ public class UsersNotifyQueue(UserNotificationRepositoryService repository,
                 };
                 contextToDb.MethodSend = MethodSend.Email.ToString();
                 var emailMessageServiceTask = emailMessage.SendMessage(sendEmailModel);
-               // var repositoryTask = _baseRepository.CreateAsync(contextToDb);
-                await Task.WhenAll(/*repositoryTask,*/ emailMessageServiceTask);
+                var repositoryTask = _baseRepository.CreateAsync(contextToDb);
+                await Task.WhenAll(repositoryTask, emailMessageServiceTask);
             }
         };
         return;
