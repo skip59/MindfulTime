@@ -8,7 +8,7 @@ public class Program
     public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        string connection = builder.Configuration.GetConnectionString("UserDatabase");
+        string connection = builder.Configuration.GetConnectionString("NotitficationServiceDatabase");
         // Add services to the container.
         builder.Services.AppNotificationContext(connection);
 

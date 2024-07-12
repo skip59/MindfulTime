@@ -9,7 +9,7 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        string connection = builder.Configuration.GetConnectionString("UserDatabase");
+        string connection = builder.Configuration.GetConnectionString("CalendarServiceDatabase");
 
         builder.Services.AppCalendarContext(connection);
         builder.Services.AddControllers();
