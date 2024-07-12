@@ -1,6 +1,6 @@
 ﻿namespace MindfulTime.Notification.Domain.Interfaces;
 
-public interface IMessageService
+public interface ISendMessageEmail
 {
     public Task<bool> SendMessage(SendModel user);
 }

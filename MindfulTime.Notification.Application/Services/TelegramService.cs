@@ -1,6 +1,6 @@
 ﻿namespace MindfulTime.Notification.Domain.Services;
 
-public class TelegramService : IMessageService
+public class TelegramService : ISendMessageTelegram
 {
     internal static ITelegramBotClient client;
     internal static List<Update> upd = [];
