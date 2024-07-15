@@ -4,13 +4,14 @@ public class TelegramService : ISendMessageTelegram
 {
     internal static ITelegramBotClient client;
     internal static List<Update> upd = [];
+
     public class TelegramBot()
     {
         public static Dictionary<string, string> users = [];
         [ReplyMenuHandler("Бот+")]
         public async Task StartMenu(ITelegramBotClient botClient, Update update)
         {
-            string msg = $"Привет {update.Message.From.FirstName.ToUpper()}. Добавь на личной странице https://localhost:7033 свой TelegramId: {update.Message.Chat.Id}, чтобы начать получать уведомления.";
+            string msg = $"";
             await PRTelegramBot.Helpers.Message.Send(botClient, update, msg);
             client = botClient;
             if (!upd.Any(x => x.Message.Chat.Id == update.Message.Chat.Id)) upd.Add(update);
