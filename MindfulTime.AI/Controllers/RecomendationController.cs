@@ -3,20 +3,28 @@ namespace MindfulTime.AI.Controllers
 {
     [Route("api/[action]")]
     [ApiController]
-    public class RecomendationController() : ControllerBase
+    public class RecomendationController(ILogger<RecomendationController> logger) : ControllerBase
     {
-        //private readonly IRecomendationService _recomendationService = recomendationService;
+        private readonly ILogger<RecomendationController> _logger = logger;
 
-        //[HttpPost]
-        //public async Task<IActionResult> GetRecomendation(UserEventMT model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
+        [HttpPost]
+        public async Task<IActionResult> TrainML([FromBody]string fileName)
+        {
+            _logger.LogInformation("Старт обучения модели");
 
-        //        var result = await Task.Run(() => _recomendationService.GetRecommendation(model.Temperature, model.WeatherType, model.StorePoint));
-        //        return Ok(result);
-        //    }
-        //    return BadRequest(ModelState);
-        //}
+            try
+            {
+                MLBuilderService.CreateNewMLModel(fileName);
+                _logger.LogInformation("Конец обучения модели");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning("Ошибка обучения модели. ", ex);
+                return Ok(false);
+
+            }
+
+            return Ok(true);
+        }
     }
 }

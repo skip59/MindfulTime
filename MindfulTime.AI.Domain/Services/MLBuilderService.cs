@@ -1,4 +1,6 @@
-﻿using static MindfulTime.AI.Domain.Models.TaskModel;
+﻿using CsvHelper;
+using System.Globalization;
+using static MindfulTime.AI.Domain.Models.TaskModel;
 
 namespace MindfulTime.AI.Domain.Services;
 
@@ -7,11 +9,21 @@ public class MLBuilderService
     private static readonly string ModelPath = Path.Combine(Environment.CurrentDirectory, "task_recomendation_model.zip");
     private static readonly MLContext mlModelContext = new();
 
-    public static bool CreateNewMLModel()
+    public static bool CreateNewMLModel(string filePath = null)
     {
         try
         {
-            var syntheticData = GenerateData();
+            var syntheticData = new List<TaskData>();
+
+            if (filePath == null || !File.Exists(filePath))
+            {
+                syntheticData = GenerateData();
+            }
+            else
+            {
+                syntheticData = GenerateDataFromFile(filePath);
+            }
+
 
             var dataView = mlModelContext.Data.LoadFromEnumerable(syntheticData);
 
@@ -111,4 +123,15 @@ public class MLBuilderService
     new TaskData { Temperature = 15f, WeatherType = "Moderate or heavy snow in area with thunder", StorePoint = 70f, Recommendation = "Избегайте длительных прогулок и одевайтесь теплее" }
         ];
     }
+
+    private static List<TaskData> GenerateDataFromFile(string filePath)
+    {
+        using var sr = new StreamReader(filePath);
+        using var csv = new CsvReader(sr, CultureInfo.InvariantCulture);
+
+        var records = csv.GetRecords<TaskData>().ToList();
+
+        return records;
+    }
+
 }
