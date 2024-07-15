@@ -4,10 +4,13 @@ using MimeKit;
 
 namespace MindfulTime.Notification.Services;
 
-public class EmailService : ISendMessageEmail
+public class NotificationService : ISendMessage
 {
     private readonly IConfiguration _configuration;
-    public EmailService(IConfiguration configuration)
+    internal static ITelegramBotClient client;
+    internal static List<Update> upd = [];
+
+    public NotificationService(IConfiguration configuration)
     {
         _configuration = configuration;
     }
@@ -37,5 +40,30 @@ public class EmailService : ISendMessageEmail
             return false;
 		}
 
+    }
+
+    public async Task<bool> SendMessageTg(SendModel item)
+    {
+        try
+        {
+            if (upd.Count > 0)
+            {
+                string message = string.Empty;
+                foreach (Update update in upd)
+                {
+                    if (update.Message.Chat.Id == item.TelegramId)
+                    {
+                        message = $"{update.Message.From.FirstName}. {item.Message}";
+                        await PRTelegramBot.Helpers.Message.Send(client, update, message);
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 }

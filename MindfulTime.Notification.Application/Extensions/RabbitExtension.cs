@@ -13,7 +13,6 @@ public static class RabbitExtension
             o.AddConsumer<UsersNotifyQueue>();
             o.UsingRabbitMq((context, cfg) => cfg.ConfigureEndpoints(context));
         });
-        service.AddSingleton<ISendMessageTelegram, TelegramService>();
-        service.AddSingleton<ISendMessageEmail, EmailService>();
+        service.AddSingleton<ISendMessage, NotificationService>();
     }
 }

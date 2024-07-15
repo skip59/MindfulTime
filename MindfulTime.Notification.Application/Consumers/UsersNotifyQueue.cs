@@ -4,13 +4,13 @@ namespace MindfulTime.Notification.Domain.Consumers;
 
 public class UsersNotifyQueue(UserNotificationRepositoryService repository,
     IBaseRepository<MessageResultEntity> baseRepository,
-    ISendMessageTelegram telegramMessage,
-    ISendMessageEmail emailMessage) : IConsumer<NUserMT>, IConsumer<NUser_del_MT>, IConsumer<NUser_upd_MT>, IConsumer<UserEvent_out_MT>
+    ISendMessage telegramMessage,
+    ISendMessage emailMessage) : IConsumer<NUserMT>, IConsumer<NUser_del_MT>, IConsumer<NUser_upd_MT>, IConsumer<UserEvent_out_MT>
 {
     private readonly UserNotificationRepositoryService _repository = repository;
     private readonly IBaseRepository<MessageResultEntity> _baseRepository = baseRepository;
-    private readonly ISendMessageTelegram telegramMessage = telegramMessage;
-    private readonly ISendMessageEmail emailMessage = emailMessage;
+    private readonly ISendMessage telegramMessage = telegramMessage;
+    private readonly ISendMessage emailMessage = emailMessage;
 
     public async Task Consume(ConsumeContext<NUserMT> context)
     {
@@ -60,7 +60,7 @@ public class UsersNotifyQueue(UserNotificationRepositoryService repository,
                     TelegramId = int.TryParse(user.TelegramId, out int result) ? result : 0,
                 };
                 contextToDb.MethodSend = MethodSend.Telegram.ToString();
-                var telegramMessageServiceTask = telegramMessage.SendMessage(sendTelegramModel);
+                var telegramMessageServiceTask = telegramMessage.SendMessageTg(sendTelegramModel);
                 var repositoryTask = _baseRepository.CreateAsync(contextToDb);
                 await Task.WhenAll(repositoryTask, telegramMessageServiceTask);
             }
