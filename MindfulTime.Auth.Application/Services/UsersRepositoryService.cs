@@ -51,7 +51,7 @@ public class UsersRepositoryService(ApplicationDbContext context) : IBaseReposit
         try
         {
             var existingUser = await _context.Users.FindAsync(entity.Id);
-            entity.Password = existingUser!.Password;
+            entity.PasswordHash = existingUser!.PasswordHash;
             _context.Users.Entry(existingUser!).CurrentValues.SetValues(entity);
             await _context.SaveChangesAsync();
             return new BaseResponse<User> { Data = entity };

@@ -1,7 +1,11 @@
-﻿namespace MindfulTime.Auth.Controllers;
+﻿using MediatR;
+using MindfulTime.Auth.App.Controllers.User.Login;
+using MindfulTime.Auth.Infrastructure.Entities;
 
-[Route("api/[action]")]
-[ApiController]
+namespace MindfulTime.Auth.Controllers;
+
+//[Route("api/[action]")]
+//[ApiController] 
 public class AuthController(IUserService user) : ControllerBase
 {
     private readonly IUserService _userService = user;
@@ -17,7 +21,6 @@ public class AuthController(IUserService user) : ControllerBase
         }
         return BadRequest("Входные данные не валидны.");
     }
-
     [HttpPost]
     public async Task<IActionResult> CreateUser(UserDto userDto)
     {

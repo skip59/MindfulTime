@@ -17,7 +17,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
             Email = user.Email,
             Id = Guid.NewGuid(),
             Name = user.Name,
-            Password = cryptPassword,
+            PasswordHash = cryptPassword,
             Role = user.Role,
             TelegramId = user.TelegramId,
             IsSendMessage = user.IsSendMessage
@@ -31,7 +31,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
             Email = userToDb.Email,
             Id = userToDb.Id,
             Name = userToDb.Name,
-            Password = userToDb.Password,
+            Password = userToDb.PasswordHash,
             Role = userToDb.Role,
             IsSendMessage = user.IsSendMessage,
             TelegramId = userToDb.TelegramId
@@ -41,7 +41,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
             Email = userToDb.Email,
             Id = userToDb.Id,
             Name = userToDb.Name,
-            Password = userToDb.Password,
+            Password = userToDb.PasswordHash,
             Role = userToDb.Role,
             IsSendMessage = user.IsSendMessage,
             TelegramId = user.TelegramId
@@ -60,7 +60,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
                 Id = result.Data.Id,
                 Name = result.Data.Name,
                 IsSendMessage = result.Data.IsSendMessage,
-                Password = result.Data.Password,
+                Password = result.Data.PasswordHash,
                 TelegramId = result.Data.TelegramId
             }
         };
@@ -80,7 +80,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
             Email = userFromDb.Email,
             Id = userFromDb.Id,
             Name = userFromDb.Name,
-            Password = userFromDb.Password,
+            Password = userFromDb.PasswordHash,
             Role = userFromDb.Role,
             TelegramId = userFromDb.TelegramId,
             IsSendMessage = userFromDb.IsSendMessage
@@ -90,7 +90,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
             Email = userFromDb.Email,
             Id = userFromDb.Id,
             Name = userFromDb.Name,
-            Password = userFromDb.Password,
+            Password = userFromDb.PasswordHash,
             Role = userFromDb.Role,
             TelegramId = userFromDb.TelegramId,
             IsSendMessage = userFromDb.IsSendMessage
@@ -108,7 +108,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
                 Email = result.Data.Email,
                 Id = result.Data.Id,
                 Name = result.Data.Name,
-                Password = result.Data.Password,
+                Password = result.Data.PasswordHash,
                 IsSendMessage = result.Data.IsSendMessage,
                 TelegramId = result.Data.TelegramId
             }
@@ -122,7 +122,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
 
         if (userFromDb != null)
         {
-            var passIsVerify = CryptoService.VerifyPassword(user.Password, userFromDb.Password);
+            var passIsVerify = CryptoService.VerifyPassword(user.Password, userFromDb.PasswordHash);
             if (passIsVerify)
             {
                 UserDto userDto = new()
@@ -133,7 +133,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
                     Email = userFromDb.Email,
                     TelegramId = userFromDb.TelegramId,
                     IsSendMessage = userFromDb.IsSendMessage,
-                    Password = userFromDb.Password
+                    Password = userFromDb.PasswordHash
                 };
                 return new BaseResponse<UserDto>() { Data = userDto };
             }
@@ -147,7 +147,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
         var mainUser = usersFromDb.SingleOrDefault(x => x.Id == user.Id && x.Role == user.Role);
         if (mainUser != null)
         {
-            var passIsVerify = CryptoService.VerifyPassword(user.Password, mainUser.Password);
+            var passIsVerify = CryptoService.VerifyPassword(user.Password, mainUser.PasswordHash);
             if (passIsVerify)
             {
                 List<UserDto> users = [];
@@ -161,7 +161,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
                         Email = _user.Email,
                         IsSendMessage = _user.IsSendMessage,
                         TelegramId = _user.TelegramId,
-                        Password = _user.Password
+                        Password = _user.PasswordHash
                     };
                     users.Add(userDto);
                 }
@@ -182,7 +182,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
             Email = user.Email,
             Id = user.Id,
             Name = user.Name,
-            Password = user.Password,
+            PasswordHash = user.Password,
             Role = user.Role,
             TelegramId = user.TelegramId,
             IsSendMessage = user.IsSendMessage,
@@ -196,7 +196,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
             Email = userToDb.Email,
             Id = userToDb.Id,
             Name = userToDb.Name,
-            Password = userToDb.Password,
+            Password = userToDb.PasswordHash,
             Role = userToDb.Role,
             IsSendMessage = userToDb.IsSendMessage,
             TelegramId = userToDb.TelegramId
@@ -206,7 +206,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
             Email = userToDb.Email,
             Id = userToDb.Id,
             Name = userToDb.Name,
-            Password = userToDb.Password,
+            Password = userToDb.PasswordHash,
             Role = userToDb.Role,
             IsSendMessage = userToDb.IsSendMessage,
             TelegramId = userToDb.TelegramId
@@ -226,7 +226,7 @@ public class UserService(IBaseRepository<User> userRepository, IPublishEndpoint 
                 Name = result.Data.Name,
                 TelegramId = result.Data.TelegramId,
                 IsSendMessage = result.Data.IsSendMessage,
-                Password = result.Data.Password
+                Password = result.Data.PasswordHash
             }
         };
     }
