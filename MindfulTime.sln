@@ -37,7 +37,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Calendar.Domain
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Notification.Domain", "MindfulTime.Notification.Application\MindfulTime.Notification.Domain.csproj", "{6D4E3BB0-BC43-4C32-83D7-139990B7DF6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindfulTime.AI.Domain", "MindfulTime.AI.Domain\MindfulTime.AI.Domain.csproj", "{DACC2ED6-6D1E-4929-93E2-ADE58F083772}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.AI.Domain", "MindfulTime.AI.Domain\MindfulTime.AI.Domain.csproj", "{DACC2ED6-6D1E-4929-93E2-ADE58F083772}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindfulTime.Auth.Client", "MindfulTime.Auth.Client\MindfulTime.Auth.Client.csproj", "{24E99DED-EBDC-4E8C-B52D-C4BA81C83446}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +99,10 @@ Global
 		{DACC2ED6-6D1E-4929-93E2-ADE58F083772}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DACC2ED6-6D1E-4929-93E2-ADE58F083772}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DACC2ED6-6D1E-4929-93E2-ADE58F083772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24E99DED-EBDC-4E8C-B52D-C4BA81C83446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24E99DED-EBDC-4E8C-B52D-C4BA81C83446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24E99DED-EBDC-4E8C-B52D-C4BA81C83446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24E99DED-EBDC-4E8C-B52D-C4BA81C83446}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,6 +120,7 @@ Global
 		{2FFC829D-BEE2-4052-AD46-3EC5EEB3BDC7} = {D7787818-4AF8-40C5-910F-98D615EB72C1}
 		{6D4E3BB0-BC43-4C32-83D7-139990B7DF6C} = {0FC51155-886D-4FBF-9C0A-4096269D0D44}
 		{DACC2ED6-6D1E-4929-93E2-ADE58F083772} = {380241A0-973C-4184-A3B8-60F4F32FDF20}
+		{24E99DED-EBDC-4E8C-B52D-C4BA81C83446} = {B8A35F25-7B49-4B15-81F8-C477FB8DF1BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB171116-F68E-41F1-8688-52C58E94296D}
