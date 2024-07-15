@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Auth.App", "Min
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Calendar.App", "MindfulTime.Calendar\MindfulTime.Calendar.App.csproj", "{265731DC-118F-42A5-9926-99CF5D02B841}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Weather", "MindfulTime.Weather\MindfulTime.Weather.csproj", "{5EBEF905-9BAB-417D-8603-825CD49DE778}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.AI", "MindfulTime.AI\MindfulTime.AI.csproj", "{1D5DAF10-4FB0-4AD2-A33D-7C77DFC7F461}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Notification.App", "MindfulTime.Notification\MindfulTime.Notification.App.csproj", "{DC0A1E8D-8B3E-4364-A1F6-C14C0CB72E06}"
@@ -37,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Calendar.Domain
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.Notification.Domain", "MindfulTime.Notification.Application\MindfulTime.Notification.Domain.csproj", "{6D4E3BB0-BC43-4C32-83D7-139990B7DF6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindfulTime.AI.Domain", "MindfulTime.AI.Domain\MindfulTime.AI.Domain.csproj", "{DACC2ED6-6D1E-4929-93E2-ADE58F083772}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindfulTime.AI.Domain", "MindfulTime.AI.Domain\MindfulTime.AI.Domain.csproj", "{DACC2ED6-6D1E-4929-93E2-ADE58F083772}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +51,6 @@ Global
 		{265731DC-118F-42A5-9926-99CF5D02B841}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{265731DC-118F-42A5-9926-99CF5D02B841}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{265731DC-118F-42A5-9926-99CF5D02B841}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5EBEF905-9BAB-417D-8603-825CD49DE778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EBEF905-9BAB-417D-8603-825CD49DE778}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EBEF905-9BAB-417D-8603-825CD49DE778}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EBEF905-9BAB-417D-8603-825CD49DE778}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1D5DAF10-4FB0-4AD2-A33D-7C77DFC7F461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1D5DAF10-4FB0-4AD2-A33D-7C77DFC7F461}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D5DAF10-4FB0-4AD2-A33D-7C77DFC7F461}.Release|Any CPU.ActiveCfg = Release|Any CPU
