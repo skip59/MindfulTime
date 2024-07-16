@@ -49,4 +49,26 @@ public class CalendarController(IUserTaskService userTask, ILogger<CalendarContr
 
         return Ok();
     }
+
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteTasks([FromBody]string EventId)
+    {
+        try
+        {
+            if (!ModelState.IsValid) throw new BadHttpRequestException("Входные данные не валидны.");
+
+            var tasks = await _userTask.DeleteTask(EventId);
+            if (tasks.isError) throw new BadHttpRequestException(tasks.ErrorMessage);
+            _logger.LogInformation("Были удалены задачи из календаря");
+
+            return Ok(tasks.Data);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning("Произошла ошибка в сервисе календаря при удалении задачи.", ex);
+        }
+
+        return Ok();
+    }
 }

@@ -36,6 +36,7 @@ public class UsersNotifyQueue(UserNotificationRepositoryService repository,
 
     public async Task Consume(ConsumeContext<UserEvent_out_MT> context)
     {
+        var test =  _repository.ReadAsync().ToList();
         var user = await _repository.ReadAsync().SingleOrDefaultAsync(x => x.Id == context.Message.UserId);
         if (user != null)
         {

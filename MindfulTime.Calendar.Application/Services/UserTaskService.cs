@@ -1,4 +1,6 @@
-﻿namespace MindfulTime.Calendar.Domain.Services;
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace MindfulTime.Calendar.Domain.Services;
 
 public class UserTaskService(IBaseRepository<UserTask> repository, IPublishEndpoint publish) : IUserTaskService
 {
@@ -20,9 +22,18 @@ public class UserTaskService(IBaseRepository<UserTask> repository, IPublishEndpo
         return new BaseResponse<EventDTO>() { Data = _event };
     }
 
-    public Task<BaseResponse<EventDTO>> DeleteTask(EventDTO _event)
+    public async Task<BaseResponse<EventDTO>> DeleteTask(string eventId)
     {
-        throw new NotImplementedException();
+        var test = _repository.ReadAsync().ToList();
+        var task = test.Where(x => x.EventId.Equals(Guid.Parse(eventId))).FirstOrDefault();
+        if (task == null) return new BaseResponse<EventDTO>() { ErrorMessage = "Нет данных" };
+
+        await _repository.DeleteAsync(task);
+
+        return new BaseResponse<EventDTO>()
+        {
+            Data = new EventDTO() { EventId = Guid.Parse(eventId)},
+        };
     }
 
     public async Task<BaseResponse<List<EventDTO>>> ReadTasks(NUserMT user)
