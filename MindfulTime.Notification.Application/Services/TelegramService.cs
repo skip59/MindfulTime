@@ -8,7 +8,7 @@ public class TelegramService : ISendMessageTelegram
     public class TelegramBot()
     {
         public static Dictionary<string, string> users = [];
-        [ReplyMenuHandler("Бот+")]
+        [SlashHandler("/bot+")]
         public async Task StartMenu(ITelegramBotClient botClient, Update update)
         {
             string msg = $"";
