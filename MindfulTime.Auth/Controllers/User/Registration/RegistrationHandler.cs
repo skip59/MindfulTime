@@ -50,7 +50,7 @@ namespace MindfulTime.Auth.App.Controllers.User.Registration
 
             if (result.Succeeded)
             {
-                var role = await _userManager.AddToRoleAsync(user, "Admin");
+                var role = await _userManager.AddToRoleAsync(user, "User");
                 return new MindfulTime.Auth.Infrastructure.Entities.User
                 {
                     DisplayName = user.DisplayName,

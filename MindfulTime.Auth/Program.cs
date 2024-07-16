@@ -42,16 +42,13 @@ namespace MindfulTime.Auth
                 option.Filters.Add(new AuthorizeFilter(policy));
             }).SetCompatibilityVersion(CompatibilityVersion.Latest);
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["TokenKey"]));
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
                 opt =>
                 {
                     opt.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = key,
                         ValidateAudience = false,
-                        ValidateIssuer = false,
+                        ValidateIssuer = false
                     };
                 });
 
