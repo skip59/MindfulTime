@@ -11,7 +11,7 @@ namespace MindfulTime.Auth.Infrastructure.Security
 
         public JwtGenerator(IConfiguration config)
         {
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["SuperSecretTokenKey"]));
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuperSecretKeyNovatorsForProject"));
         }
 
         public string CreateToken(MindfulTime.Auth.Infrastructure.Entities.User user)
