@@ -47,6 +47,7 @@ namespace MindfulTime.Auth.App.Controllers.User.Registration
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
+
             if (result.Succeeded)
             {
                 var role = await _userManager.AddToRoleAsync(user, "Admin");

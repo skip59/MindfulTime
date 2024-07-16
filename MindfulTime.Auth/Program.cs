@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using MindfulTime.Auth.App.Controllers.User.Login;
-using Microsoft.Extensions.Configuration;
 using MindfulTime.Auth.App.Controllers.User.Registration;
 
 namespace MindfulTime.Auth
